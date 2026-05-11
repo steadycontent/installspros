@@ -125,7 +125,7 @@ Rules:
           "Content-Type": "image/png",
           "x-upsert": "true",
         },
-        body: bytes,
+        body: maskBytes,
       }
     );
 
