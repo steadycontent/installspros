@@ -110,9 +110,9 @@ Rules:
     // Extract base64 data from data URL
     const b64Data = maskDataUrl.split(",")[1];
     const binaryStr = atob(b64Data);
-    const bytes = new Uint8Array(binaryStr.length);
+    const maskBytes = new Uint8Array(binaryStr.length);
     for (let i = 0; i < binaryStr.length; i++) {
-      bytes[i] = binaryStr.charCodeAt(i);
+      maskBytes[i] = binaryStr.charCodeAt(i);
     }
 
     const maskPath = `lighting/masks/${crypto.randomUUID()}.png`;
