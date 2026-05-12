@@ -88,7 +88,7 @@ const handler = async (req: Request): Promise<Response> => {
             Authorization: `Bearer ${RESEND_API_KEY}`,
           },
           body: JSON.stringify({
-            from: "InstallPros <noreply@installspros.com>",
+            from: "InstallPros <support@mail.installpros.io>",
             to: ["support@mail.installpros.io"],
             subject: `Contact Form: ${contactData.inquiry || "General Inquiry"} — ${name}`,
             html: `
