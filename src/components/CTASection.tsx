@@ -48,7 +48,7 @@ const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "R
           </Button>
           {!hidePhoneCTA && (
             <Button variant="heroOutline" size="default" asChild>
-              <a href="tel:+15128817007">Sales (512) 881-7007</a>
+              <a href="tel:+15126756605">Sales (512) 675-6605</a>
             </Button>
           )}
         </div>

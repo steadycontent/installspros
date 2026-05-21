@@ -67,11 +67,11 @@ const Navbar = () => {
             Instant Quote
           </button>
           <a
-            href="tel:+15128817007"
+            href="tel:+15126756605"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0D9488] text-white text-[16px] font-normal tracking-wide h-12 hover:bg-[#0B7C72] transition-colors select-all cursor-pointer px-[20px] shadow"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            Sales (512) 881-7007
+            Sales (512) 675-6605
           </a>
         </div>
 
@@ -85,7 +85,7 @@ const Navbar = () => {
             Quote
           </button>
           <a
-            href="tel:+15128817007"
+            href="tel:+15126756605"
             className="inline-flex items-center justify-center whitespace-nowrap gap-2 rounded-full bg-[#0D9488] text-white text-[15px] font-normal h-11 px-5 hover:bg-[#0B7C72] transition-colors"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
