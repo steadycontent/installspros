@@ -60,7 +60,7 @@ const SecuritySystems = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg" onClick={() => handleQuoteCTA("security_cta", navigate)}>Get Your Free Quote</Button>
               <Button variant="heroOutline" size="default" asChild>
-                <a href="tel:+15128817007">Sales (512) 881-7007</a>
+                <a href="tel:+15126756605">Sales (512) 675-6605</a>
               </Button>
             </div>
           </div>

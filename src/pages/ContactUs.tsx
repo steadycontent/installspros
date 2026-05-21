@@ -93,7 +93,7 @@ const ContactUs = () => {
         <title>Contact Us | InstallPros - Get in Touch</title>
         <meta
           name="description"
-          content="Contact InstallPros for Starlink installation quotes, support, or questions. Call (512) 881-7007 or fill out our contact form."
+          content="Contact InstallPros for Starlink installation quotes, support, or questions. Call (512) 675-6605 or fill out our contact form."
         />
       </Helmet>
 
@@ -121,14 +121,14 @@ const ContactUs = () => {
           <section className="px-6 -mt-4 mb-12">
             <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-4">
               <a
-                href="tel:+15128817007"
+                href="tel:+15126756605"
                 className="group bg-card border border-border rounded-[4px] p-6 text-center hover:border-primary/40 hover:shadow-lg transition-all"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 transition-colors">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-1">Call Us</h3>
-                <p className="text-primary font-medium">(512) 881-7007</p>
+                <p className="text-primary font-medium">(512) 675-6605</p>
                 <p className="text-xs text-muted-foreground mt-1">Mon–Fri, 8am–6pm CT</p>
               </a>
 
