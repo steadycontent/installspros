@@ -21,21 +21,21 @@ const Shop = () => {
   return (
     <>
       <Helmet>
-        <title>Starlink Equipment & Accessories | InstallPros</title>
-        <meta name="description" content="Shop professional-grade Starlink mounts, cables, signal tools, and accessories. Everything you need for a perfect installation." />
+        <title>Satellite Internet Equipment & Accessories | InstallPros</title>
+        <meta name="description" content="Shop professional-grade satellite internet mounts, cables, signal tools, and accessories. Everything you need for a perfect installation." />
       </Helmet>
       <Navbar />
       <main>
         {/* Hero */}
         <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-          <img src={heroImage} alt="Starlink equipment and accessories" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={heroImage} alt="Satellite internet equipment and accessories" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
           <div className="relative z-10 text-center max-w-3xl mx-auto px-6 py-32">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
               Essential Equipment & Accessories
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 text-balance">
-              Professional-grade mounts, cables, and tools designed for maximum Starlink performance and longevity.
+              Professional-grade mounts, cables, and tools designed for maximum satellite internet performance and longevity.
             </p>
             <Button variant="hero" size="lg" onClick={() => handleQuoteCTA("shop_hero", navigate)}>
               Request a Quote

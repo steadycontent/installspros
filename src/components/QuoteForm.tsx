@@ -29,10 +29,10 @@ const quoteFormSchema = z.object({
 type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
 const installationTypes = [
-  { value: "residential", label: "Residential Starlink Installation" },
-  { value: "commercial", label: "Commercial Starlink Installation" },
-  { value: "marine", label: "Marine Starlink Installation" },
-  { value: "mobile", label: "Mobile/RV Starlink Installation" },
+  { value: "residential", label: "Residential Satellite Internet Installation" },
+  { value: "commercial", label: "Commercial Satellite Internet Installation" },
+  { value: "marine", label: "Marine Satellite Internet Installation" },
+  { value: "mobile", label: "Mobile/RV Satellite Internet Installation" },
 ];
 
 interface QuoteFormProps {

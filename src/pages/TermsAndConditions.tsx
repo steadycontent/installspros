@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Service Agreement</h2>
               <p className="text-gray-600">
-                By scheduling an installation with InstallPros, you agree to these terms and conditions. Our services include professional installation of Starlink satellite systems and smart home devices.
+                By scheduling an installation with InstallPros, you agree to these terms and conditions. Our services include professional installation of satellite internet systems and smart home devices.
               </p>
             </section>
 

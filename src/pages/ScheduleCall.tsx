@@ -13,7 +13,7 @@ const ScheduleCall = () => {
     <>
       <Helmet>
         <title>Schedule a Call | InstallPros</title>
-        <meta name="description" content="Schedule a call with our Starlink and smart home installation experts." />
+        <meta name="description" content="Schedule a call with our satellite internet and smart home installation experts." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
