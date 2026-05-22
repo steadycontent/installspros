@@ -207,14 +207,26 @@
     min-width: 44px;
   }
 
-  /* Disable Trustindex "based on X reviews" hyperlink */
-  .trustindex-widget a[href*="google.com"],
-  .ti-widget a[href*="google.com"],
-  div[data-layout-id] a[href*="google.com"],
-  #trustindex a[href*="google.com"] {
+  /* Disable Trustindex header "based on X reviews" / Google link entirely */
+  .ti-widget a,
+  .ti-widget-container a,
+  [class*="ti-widget"] a,
+  [class*="ti-header"] a,
+  [class*="ti-rating"] a,
+  [class*="ti-name"] a,
+  [class*="trustindex"] a,
+  div[data-layout-id] a,
+  #trustindex a {
     pointer-events: none !important;
     text-decoration: none !important;
     color: inherit !important;
+    cursor: default !important;
+  }
+  .ti-widget a *,
+  [class*="ti-widget"] a *,
+  [class*="ti-header"] a *,
+  [class*="trustindex"] a * {
+    pointer-events: none !important;
     cursor: default !important;
   }
 }
