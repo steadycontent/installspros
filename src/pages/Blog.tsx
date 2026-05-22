@@ -29,7 +29,7 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | InstallPros - Starlink & Smart Home Tips</title>
+        <title>Blog | InstallPros — Satellite Internet & Smart Home Tips</title>
         <meta name="description" content="Expert tips, guides, and news about Starlink installation and smart home automation." />
       </Helmet>
 
