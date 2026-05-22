@@ -33,7 +33,7 @@ const INeedStarlink = () => {
           <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-[120px] sm:pt-[140px] pb-6">
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white animate-fade-in-up mb-3 sm:mb-4 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]">
-              Order Starlink Internet Installed at Your Home
+              Professional Satellite Internet Installation
             </h1>
 
             {/* Subheadline */}
