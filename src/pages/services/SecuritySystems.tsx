@@ -23,7 +23,7 @@ const SecuritySystems = () => {
     <>
       <Helmet>
         <title>Security System Installation | InstallPros</title>
-        <meta name="description" content="Professional security system installation. Smart cameras, motion sensors, smart locks, and 24/7 monitoring powered by Starlink." />
+        <meta name="description" content="Professional security system installation. Smart cameras, motion sensors, smart locks, and 24/7 monitoring powered by satellite internet." />
       </Helmet>
       <Navbar />
       <main>
@@ -32,7 +32,7 @@ const SecuritySystems = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
           <div className="relative z-10 text-center max-w-3xl mx-auto px-6 py-32">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">Smart Security Systems</h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 text-balance">Protect your home with intelligent security — cameras, sensors, and smart locks all connected through your Starlink network.</p>
+            <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 text-balance">Protect your home with intelligent security — cameras, sensors, and smart locks all connected through your satellite internet network.</p>
             <Button variant="hero" size="lg" onClick={() => handleQuoteCTA("security_hero", navigate)}>Get Your Free Quote</Button>
           </div>
         </section>

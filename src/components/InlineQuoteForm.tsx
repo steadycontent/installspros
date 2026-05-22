@@ -85,10 +85,10 @@ const stepSchemas = {
 };
 
 const installationTypes = [
-  { value: "residential-starlink", label: "Residential Starlink", icon: "🏠" },
-  { value: "commercial-starlink", label: "Commercial Starlink", icon: "🏢" },
-  { value: "marine-starlink", label: "Marine Starlink", icon: "🚢" },
-  { value: "mobile-starlink", label: "Mobile/RV Starlink", icon: "🚐" },
+  { value: "residential-starlink", label: "Residential Satellite Internet", icon: "🏠" },
+  { value: "commercial-starlink", label: "Commercial Satellite Internet", icon: "🏢" },
+  { value: "marine-starlink", label: "Marine Satellite Internet", icon: "🚢" },
+  { value: "mobile-starlink", label: "Mobile/RV Satellite Internet", icon: "🚐" },
 ];
 
 interface InlineQuoteFormProps {

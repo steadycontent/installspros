@@ -147,7 +147,7 @@ const ThankYou = () => {
 
   // Build SMS deep link with context
   const smsBody = encodeURIComponent(
-    `Hi, I'd like to send photos for my Starlink quote${quoteData?.address ? ` at ${quoteData.address}` : ''}.`
+    `Hi, I'd like to send photos for my satellite internet quote${quoteData?.address ? ` at ${quoteData.address}` : ''}.`
   );
 
   return (

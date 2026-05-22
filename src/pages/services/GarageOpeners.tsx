@@ -12,7 +12,7 @@ const features = [
   { icon: Shield, title: "Enhanced Security", desc: "Encrypted signals, auto-close timers, and real-time alerts keep your garage secure." },
   { icon: Clock, title: "Scheduled Access", desc: "Set automatic open/close schedules for deliveries, dog walkers, or daily routines." },
   { icon: Users, title: "Guest Access", desc: "Share temporary access codes with family, friends, or service providers." },
-  { icon: Wifi, title: "Starlink Connected", desc: "Reliable Starlink internet ensures your smart opener never loses connectivity." },
+  { icon: Wifi, title: "Always Connected", desc: "Reliable satellite internet ensures your smart opener never loses connectivity." },
   { icon: DoorOpen, title: "Voice Control", desc: "Works with Alexa and Google Home — just say the word to open or close." },
 ];
 

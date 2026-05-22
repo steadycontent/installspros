@@ -93,7 +93,7 @@ const ContactUs = () => {
         <title>Contact Us | InstallPros - Get in Touch</title>
         <meta
           name="description"
-          content="Contact InstallPros for Starlink installation quotes, support, or questions. Call (512) 675-6605 or fill out our contact form."
+          content="Contact InstallPros for satellite internet installation quotes, support, or questions. Call (512) 675-6605 or fill out our contact form."
         />
       </Helmet>
 
@@ -254,7 +254,7 @@ const ContactUs = () => {
                     <h3 className="font-semibold text-foreground mb-4">Why reach out?</h3>
                     <ul className="space-y-3">
                       {[
-                        "Get a custom Starlink installation quote",
+                        "Get a custom satellite internet installation quote",
                         "Schedule a same-week installation",
                         "Technical support for existing installs",
                         "Commercial & multi-site project inquiries",

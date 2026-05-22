@@ -29,8 +29,8 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | InstallPros - Starlink & Smart Home Tips</title>
-        <meta name="description" content="Expert tips, guides, and news about Starlink installation and smart home automation." />
+        <title>Blog | InstallPros — Satellite Internet & Smart Home Tips</title>
+        <meta name="description" content="Expert tips, guides, and news about satellite internet installation and smart home automation." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -46,7 +46,7 @@ const Blog = () => {
                 </span>
               </h1>
               <p className="text-xl text-gray-600">
-                Tips, guides, and news for Starlink and smart home enthusiasts.
+                Tips, guides, and news for satellite internet and smart home enthusiasts.
               </p>
             </div>
 

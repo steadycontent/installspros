@@ -6,15 +6,15 @@ import commercialImage from "@/assets/starlink-commercial-opt.jpg";
 import mobileImage from "@/assets/starlink-mobile-rv.png";
 const slides = [{
   id: "residential",
-  title: "Residential Starlink",
+  title: "Residential Satellite Internet",
   image: residentialImage
 }, {
   id: "commercial",
-  title: "Commercial Starlink",
+  title: "Commercial Satellite Internet",
   image: commercialImage
 }, {
   id: "mobile",
-  title: "Mobile/RV Starlink",
+  title: "Mobile/RV Satellite Internet",
   image: mobileImage
 }];
 const HeroWithCarousel = () => {
@@ -43,12 +43,12 @@ const HeroWithCarousel = () => {
       {/* Content */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-64 sm:pt-72 pb-16 sm:pb-24">
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-[#00A3FF] animate-fade-in-up mb-4 sm:mb-6 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none] whitespace-nowrap w-full">
-          Complete Starlink Installation Solutions
+          Complete Satellite Internet Installation Solutions
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]" style={{
         animationFillMode: 'forwards'
       }}>
-          Expert nationwide installs with the best pricing on Starlink hardware and smart home integrations.
+          Expert nationwide installs with the best pricing on satellite internet hardware and smart home integrations.
         </p>
         
         {/* Inline Quote Form with dark backdrop */}

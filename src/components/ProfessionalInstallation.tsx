@@ -12,7 +12,7 @@ const items = [
   },
   {
     title: "Quick Install: Within 7 Days",
-    description: "We supply and install your Starlink system, typically within 7 days. Installations take 1–3 hours, with optimal performance within 12 hours.",
+    description: "We supply and install your satellite internet system, typically within 7 days. Installations take 1–3 hours, with optimal performance within 12 hours.",
   },
   {
     title: "Nationwide Coverage",

@@ -161,7 +161,7 @@ const HeroSection = ({
                 className="group relative flex flex-col items-center justify-center gap-2 sm:gap-3 aspect-square rounded-[4px] border-2 border-red-500/30 bg-red-500/5 hover:bg-red-500/10 hover:border-red-500/60 transition-all duration-300 text-center p-3 sm:p-4">
 
                   <img alt="Support headset" className="w-12 h-12 sm:w-16 sm:h-16 object-fill border-0" src="/lovable-uploads/a4c57ed0-af14-4c51-a6a4-871fa399b3f0.png" />
-                  <span className="text-white leading-tight font-sans font-medium sm:text-xl text-base">I Need Starlink<br />help or support</span>
+                  <span className="text-white leading-tight font-sans font-medium sm:text-xl text-base">I Need Help<br />or Support</span>
                   <span className="text-[9px] sm:text-[10px] text-white/50">
                     Billing, outages, support
                   </span>

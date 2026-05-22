@@ -12,7 +12,7 @@ const features = [
   { icon: Thermometer, title: "Smart Thermostats", desc: "AI-powered climate control that learns your preferences and saves on energy bills." },
   { icon: Shield, title: "Security Systems", desc: "24/7 monitoring with smart cameras, sensors, and instant mobile alerts." },
   { icon: Lightbulb, title: "Smart Lighting", desc: "Automated scenes, schedules, and mood lighting throughout your home." },
-  { icon: Wifi, title: "Network Integration", desc: "Your Starlink connection powers every smart device with reliable, high-speed internet." },
+  { icon: Wifi, title: "Network Integration", desc: "Your satellite internet connection powers every smart device with reliable, high-speed internet." },
   { icon: Home, title: "Whole-Home Automation", desc: "Unified control of locks, blinds, garage doors, and more from a single app." },
 ];
 
@@ -23,7 +23,7 @@ const SmartHome = () => {
     <>
       <Helmet>
         <title>Smart Home Automation | InstallPros</title>
-        <meta name="description" content="Transform your home with professional smart home automation. Voice control, smart thermostats, security systems, and lighting — all powered by Starlink." />
+        <meta name="description" content="Transform your home with professional smart home automation. Voice control, smart thermostats, security systems, and lighting — all powered by satellite internet." />
       </Helmet>
       <Navbar />
       <main>
@@ -36,7 +36,7 @@ const SmartHome = () => {
               Innovative Home Automation
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 text-balance">
-              Connect your Starlink network with smart home devices, creating a unified, intelligent environment for maximum comfort and efficiency.
+              Connect your satellite internet network with smart home devices, creating a unified, intelligent environment for maximum comfort and efficiency.
             </p>
             <Button variant="hero" size="lg" onClick={() => handleQuoteCTA("smart_home_hero", navigate)}>
               Get Your Free Quote

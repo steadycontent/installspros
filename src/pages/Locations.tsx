@@ -49,8 +49,8 @@ const Locations = () => {
   return (
     <>
       <Helmet>
-        <title>Service Locations | InstallPros - 37 States Starlink Installation</title>
-        <meta name="description" content="InstallPros provides Starlink and smart home installation services across 37 U.S. states. Find a location near you." />
+        <title>Service Locations | InstallPros - 37 States Satellite Internet Installation</title>
+        <meta name="description" content="InstallPros provides satellite internet and smart home installation services across 37 U.S. states. Find a location near you." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

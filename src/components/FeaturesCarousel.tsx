@@ -9,7 +9,7 @@ import mobileImage from "@/assets/starlink-mobile.jpg";
 const slides = [
   {
     id: "residential",
-    title: "Residential Starlink",
+    title: "Residential Satellite Internet",
     description: "Professional home installation with optimal roof positioning for maximum signal strength and reliability.",
     image: residentialImage,
     icon: Home,
@@ -17,7 +17,7 @@ const slides = [
   },
   {
     id: "commercial",
-    title: "Commercial Starlink",
+    title: "Commercial Satellite Internet",
     description: "Enterprise-grade connectivity for offices, warehouses, and business facilities with dedicated support.",
     image: commercialImage,
     icon: Building2,
@@ -25,7 +25,7 @@ const slides = [
   },
   {
     id: "marine",
-    title: "Marine Starlink",
+    title: "Marine Satellite Internet",
     description: "Stay connected at sea with durable marine-grade satellite installations built for the open water.",
     image: marineImage,
     icon: Ship,
@@ -33,7 +33,7 @@ const slides = [
   },
   {
     id: "mobile",
-    title: "Mobile/RV Starlink",
+    title: "Mobile/RV Satellite Internet",
     description: "Internet anywhere you roam with portable and RV-mounted solutions for life on the road.",
     image: mobileImage,
     icon: Caravan,

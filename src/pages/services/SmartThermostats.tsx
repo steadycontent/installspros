@@ -12,7 +12,7 @@ const benefits = [
   { icon: Smartphone, title: "Remote Control", desc: "Adjust your home temperature from anywhere using your phone." },
   { icon: BarChart3, title: "Usage Reports", desc: "Detailed energy reports help you understand and optimize consumption." },
   { icon: Clock, title: "Smart Scheduling", desc: "Learns your routine and auto-adjusts to save energy when you're away." },
-  { icon: Wifi, title: "Starlink Powered", desc: "Reliable connectivity ensures your thermostat always stays online." },
+  { icon: Wifi, title: "Always Online", desc: "Reliable connectivity ensures your thermostat always stays online." },
   { icon: Thermometer, title: "Multi-Zone Control", desc: "Set different temperatures for each room or floor in your home." },
 ];
 
@@ -23,7 +23,7 @@ const SmartThermostats = () => {
     <>
       <Helmet>
         <title>Smart Thermostat Installation | InstallPros</title>
-        <meta name="description" content="Professional smart thermostat installation. Save energy, control from anywhere, and integrate with your Starlink-powered smart home." />
+        <meta name="description" content="Professional smart thermostat installation. Save energy, control from anywhere, and integrate with your satellite-internet-powered smart home." />
       </Helmet>
       <Navbar />
       <main>
