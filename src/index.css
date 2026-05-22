@@ -207,7 +207,16 @@
     min-width: 44px;
   }
 
-  /* Disable Trustindex header "based on X reviews" / Google link entirely */
+  /* Hide Trustindex duplicate review summary/footer blocks entirely */
+  .ti-footer,
+  .ti-widget .ti-footer,
+  .ti-widget-container .ti-footer,
+  [class*="ti-widget"] .ti-footer {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  /* Disable any remaining Trustindex header "based on X reviews" / Google links */
   .ti-widget a,
   .ti-widget-container a,
   [class*="ti-widget"] a,

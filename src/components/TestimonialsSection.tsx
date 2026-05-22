@@ -12,9 +12,11 @@ const TestimonialsSection = () => {
     script.async = true;
     containerRef.current.appendChild(script);
 
-    // Strip clickable anchors inside the Trustindex widget (header "based on X reviews", Google logo, etc.)
-    const stripLinks = () => {
+    // Remove the Trustindex summary/footer blocks entirely so the duplicated
+    // "Based on X reviews" areas cannot show hover states or dead links.
+    const sanitizeWidget = () => {
       if (!containerRef.current) return;
+      containerRef.current.querySelectorAll(".ti-footer").forEach((el) => el.remove());
       const anchors = containerRef.current.querySelectorAll("a");
       anchors.forEach((a) => {
         a.removeAttribute("href");
@@ -25,11 +27,14 @@ const TestimonialsSection = () => {
         a.style.color = "inherit";
       });
     };
-    const interval = window.setInterval(stripLinks, 500);
+    const observer = new MutationObserver(sanitizeWidget);
+    observer.observe(containerRef.current, { childList: true, subtree: true });
+    const interval = window.setInterval(sanitizeWidget, 500);
     const stopTimeout = window.setTimeout(() => window.clearInterval(interval), 15000);
 
     return () => {
       script.remove();
+      observer.disconnect();
       window.clearInterval(interval);
       window.clearTimeout(stopTimeout);
     };
