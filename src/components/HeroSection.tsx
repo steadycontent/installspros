@@ -101,7 +101,7 @@ const HeroSection = ({
 
         {/* Headline */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white animate-fade-in-up mb-3 sm:mb-4 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]">
-          {heading || (<>Get Your Starlink Installed<br className="sm:hidden" /> By a Professional.</>)}
+          {heading || (<>Professional Satellite Internet<br className="sm:hidden" /> Installation</>)}
         </h1>
 
         {/* Subheadline */}
