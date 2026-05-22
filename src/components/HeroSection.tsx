@@ -101,7 +101,7 @@ const HeroSection = ({
 
         {/* Headline */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white animate-fade-in-up mb-3 sm:mb-4 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]">
-          {heading || (<>Get Your Starlink Installed<br className="sm:hidden" /> By a Professional.</>)}
+          {heading || (<>Professional Satellite Internet<br className="sm:hidden" /> Installation</>)}
         </h1>
 
         {/* Subheadline */}
@@ -109,7 +109,7 @@ const HeroSection = ({
           className="text-base sm:text-lg md:text-xl text-[#D1D5DB] max-w-3xl mx-auto mb-2 sm:mb-3 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 whitespace-pre-line"
           style={{ animationFillMode: "forwards" }}>
 
-          {subheading || "New residential Starlink installations professionally handled from start to finish."}
+          {subheading || "Professional residential satellite internet installations handled from start to finish."}
         </p>
 
         {!badgeAboveHeading &&
@@ -147,7 +147,7 @@ const HeroSection = ({
                 </div>
                 <div className="w-full p-3 sm:p-4">
                   <span className="block text-base sm:text-xl md:text-2xl font-bold text-white leading-tight uppercase tracking-wide">
-                    I Need Starlink Installation
+                    Get My Quote
                   </span>
                 </div>
               </button>
@@ -181,6 +181,9 @@ const HeroSection = ({
                 </div>
               </div>
             </div>
+            <p className="text-center text-[11px] sm:text-xs text-white/60 mt-4 px-4">
+              Compatible with Starlink®, Gen 3, Roam, and other satellite internet systems.
+            </p>
           </div>
         }
 

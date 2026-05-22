@@ -10,7 +10,7 @@ interface CTASectionProps {
   hidePhoneCTA?: boolean;
 }
 
-const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "Ready to Order Starlink?", subheading = "Join thousands of homeowners who trust InstallPros for professional new Starlink installations.", hidePhoneCTA = false }: CTASectionProps) => {
+const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "Ready for Satellite Internet?", subheading = "Join thousands of homeowners who trust InstallPros for professional satellite internet installations.", hidePhoneCTA = false }: CTASectionProps) => {
   const navigate = useNavigate();
 
   return (
@@ -44,14 +44,17 @@ const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "R
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button variant="hero" size="lg" onClick={() => handleQuoteCTA("cta_section_quote", navigate)}>
-            I Need Starlink Installation
+            Get My Quote
           </Button>
           {!hidePhoneCTA && (
             <Button variant="heroOutline" size="default" asChild>
-              <a href="tel:+15126756605">Sales (512) 675-6605</a>
+              <a href="tel:+15126756605">Call Now (512) 675-6605</a>
             </Button>
           )}
         </div>
+        <p className="text-center text-xs text-gray-400 mt-6 max-w-xl mx-auto">
+          Compatible with Starlink®, Gen 3, Roam, and other satellite internet systems.
+        </p>
       </div>
     </section>
   );

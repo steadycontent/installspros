@@ -31,9 +31,12 @@ const Footer = () => {
             © {currentYear} InstallPros. All Rights Reserved.
           </p>
           <p className="text-muted-foreground/60 text-xs">
-            Nationwide Starlink & Smart Home Installations
+            Nationwide Satellite Internet & Smart Home Installations
           </p>
         </div>
+        <p className="text-muted-foreground/60 text-[11px] leading-relaxed mt-4 text-center md:text-left max-w-3xl">
+          InstallPros is an independent installation company and is not affiliated with or endorsed by Starlink or SpaceX.
+        </p>
       </div>
     </footer>
   );

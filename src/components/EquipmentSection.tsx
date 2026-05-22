@@ -11,7 +11,7 @@ const EquipmentSection = () => {
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-60" />
             <img
               src={starlinkKitImage}
-              alt="Starlink equipment kit"
+              alt="Satellite internet equipment kit"
               className="relative rounded-2xl shadow-lg w-full"
             />
           </div>
@@ -21,7 +21,7 @@ const EquipmentSection = () => {
               Optimize Your Experience with Essential Equipment
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              Enhance your Starlink setup with professional-grade mounts, cables, and accessories designed for maximum performance and longevity.
+              Enhance your satellite internet setup with professional-grade mounts, cables, and accessories designed for maximum performance and longevity.
             </p>
             <ul className="space-y-3 mb-8">
               {[

@@ -44,12 +44,12 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>InstallPros – Starlink Installation & Smart Home Experts</title>
+        <title>Satellite Internet Installation Services | InstallPros</title>
         <meta
           name="description"
-          content="All-in-One Starlink installation services and smart home automation solutions across the U.S. Expert nationwide installs with the best pricing."
+          content="Professional satellite internet installation services for residential, commercial, RV, and marine systems nationwide."
         />
-        <meta name="keywords" content="Starlink installation, smart home, satellite internet, home automation, security systems" />
+        <meta name="keywords" content="satellite internet installation, smart home, satellite internet, home automation, security systems" />
         <link rel="canonical" href="https://installpros.io" />
       </Helmet>
 

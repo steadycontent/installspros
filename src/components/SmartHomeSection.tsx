@@ -12,7 +12,7 @@ const SmartHomeSection = () => {
               Innovative Home Automation
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              Connect your Starlink network with smart home devices, creating a unified, intelligent environment for maximum comfort and efficiency.
+              Connect your satellite internet network with smart home devices, creating a unified, intelligent environment for maximum comfort and efficiency.
             </p>
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[

@@ -15,10 +15,10 @@ const INeedStarlink = () => {
   return (
     <>
       <Helmet>
-        <title>Get Starlink Installed – InstallPros</title>
+        <title>Satellite Internet Installation | InstallPros</title>
         <meta
           name="description"
-          content="Choose between ordering a professional Starlink installation or getting support for your existing Starlink service."
+          content="Order professional satellite internet installation or find support for your existing service."
         />
         <link rel="canonical" href="https://installpros.io/i-need-starlink" />
       </Helmet>
@@ -33,7 +33,7 @@ const INeedStarlink = () => {
           <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-[120px] sm:pt-[140px] pb-6">
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white animate-fade-in-up mb-3 sm:mb-4 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]">
-              Order Starlink Internet Installed at Your Home
+              Professional Satellite Internet Installation
             </h1>
 
             {/* Subheadline */}
@@ -41,7 +41,7 @@ const INeedStarlink = () => {
               className="text-base sm:text-lg md:text-xl text-[#D1D5DB] max-w-3xl mx-auto mb-2 sm:mb-3 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 text-balance"
               style={{ animationFillMode: "forwards" }}
             >
-              New residential Starlink installations professionally handled from start to finish.
+              Professional residential satellite internet installations handled from start to finish.
             </p>
 
             {/* Badge */}
@@ -77,7 +77,7 @@ const INeedStarlink = () => {
                   </div>
                   <div className="w-full p-3 sm:p-4">
                     <span className="block text-base sm:text-xl md:text-2xl font-bold text-white leading-tight uppercase tracking-wide">
-                      I Need Starlink Installation
+                      Get My Quote
                     </span>
                   </div>
                 </button>

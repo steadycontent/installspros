@@ -26,7 +26,7 @@ const steps = [
     number: 4,
     title: "Enjoy High-Speed Internet!",
     time: "forever",
-    description: "Sit back and enjoy blazing-fast Starlink connectivity.",
+    description: "Sit back and enjoy blazing-fast satellite internet connectivity.",
     icon: Wifi,
   },
 ];
