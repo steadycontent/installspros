@@ -181,6 +181,9 @@ const HeroSection = ({
                 </div>
               </div>
             </div>
+            <p className="text-center text-[11px] sm:text-xs text-white/60 mt-4 px-4">
+              Compatible with Starlink®, Gen 3, Roam, and other satellite internet systems.
+            </p>
           </div>
         }
 
