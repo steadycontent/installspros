@@ -7,8 +7,8 @@ import {
 
 const faqs = [
   {
-    question: "What if I haven't received my Starlink kit yet?",
-    answer: "No problem—we can help you order one or schedule installation once it arrives.",
+    question: "What if I haven't received my satellite internet kit yet?",
+    answer: "No problem—we can help you order one or schedule installation once it arrives. We're compatible with Starlink®, Gen 3, Roam, and other satellite internet systems.",
   },
   {
     question: "Do you install on roofs, barns, or poles?",
@@ -19,16 +19,16 @@ const faqs = [
     answer: "Absolutely. We offer Ubiquiti mesh routers, signal calibration, and smart home add-ons.",
   },
   {
-    question: "How much does Starlink installation cost?",
+    question: "How much does satellite internet installation cost?",
     answer: "Our full install is $899, including dish mounting, cable routing, and router setup. You just pay $300 upfront to book. (If your home needs extra troubleshooting, we'll let you know first.)",
   },
   {
     question: "How long does the installation take?",
-    answer: "Usually 1–3 hours, depending on your home. After setup, it can take up to 12 hours for Starlink to fully optimize and connect with the satellites—it's normal, and we'll explain everything before we go.",
+    answer: "Usually 1–3 hours, depending on your home. After setup, it can take up to 12 hours for the system to fully optimize and connect with the satellites—it's normal, and we'll explain everything before we go.",
   },
   {
-    question: "Does Starlink come with a router?",
-    answer: "Yes! The Starlink kit includes a Wi-Fi router, cables, and everything needed to get you online. You don't need to buy anything extra (unless you want upgrades like a mesh system—we offer that too).",
+    question: "Does the satellite internet kit come with a router?",
+    answer: "Yes! Most kits include a Wi-Fi router, cables, and everything needed to get you online. You don't need to buy anything extra (unless you want upgrades like a mesh system—we offer that too).",
   },
   {
     question: "What happens after installation?",
