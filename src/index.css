@@ -206,6 +206,17 @@
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Disable Trustindex "based on X reviews" hyperlink */
+  .trustindex-widget a[href*="google.com"],
+  .ti-widget a[href*="google.com"],
+  div[data-layout-id] a[href*="google.com"],
+  #trustindex a[href*="google.com"] {
+    pointer-events: none !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: default !important;
+  }
 }
 
 @layer utilities {
