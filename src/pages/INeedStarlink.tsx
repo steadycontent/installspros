@@ -41,7 +41,7 @@ const INeedStarlink = () => {
               className="text-base sm:text-lg md:text-xl text-[#D1D5DB] max-w-3xl mx-auto mb-2 sm:mb-3 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 text-balance"
               style={{ animationFillMode: "forwards" }}
             >
-              New residential Starlink installations professionally handled from start to finish.
+              Professional residential satellite internet installations handled from start to finish.
             </p>
 
             {/* Badge */}
