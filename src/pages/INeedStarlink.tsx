@@ -15,10 +15,10 @@ const INeedStarlink = () => {
   return (
     <>
       <Helmet>
-        <title>Get Starlink Installed – InstallPros</title>
+        <title>Satellite Internet Installation | InstallPros</title>
         <meta
           name="description"
-          content="Choose between ordering a professional Starlink installation or getting support for your existing Starlink service."
+          content="Order professional satellite internet installation or find support for your existing service."
         />
         <link rel="canonical" href="https://installpros.io/i-need-starlink" />
       </Helmet>
