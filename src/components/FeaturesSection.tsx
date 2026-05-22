@@ -5,22 +5,22 @@ import mobileImage from "@/assets/starlink-mobile-rv-new-opt.jpg";
 
 const features = [
   {
-    title: "Residential Starlink",
+    title: "Residential Satellite Internet",
     description: "Professional home installation with optimal roof positioning for maximum signal.",
     image: residentialImage,
   },
   {
-    title: "Commercial Starlink",
+    title: "Commercial Satellite Internet",
     description: "Enterprise-grade connectivity for offices, warehouses, and business facilities.",
     image: commercialImage,
   },
   {
-    title: "Marine Starlink",
+    title: "Marine Satellite Internet",
     description: "Stay connected at sea with durable marine-grade satellite installations.",
     image: marineImage,
   },
   {
-    title: "Mobile/RV Starlink",
+    title: "Mobile/RV Satellite Internet",
     description: "Internet anywhere you roam with portable and RV-mounted solutions.",
     image: mobileImage,
   },
@@ -32,7 +32,7 @@ const FeaturesSection = () => {
       <div className="max-w-7xl mx-auto min-w-0">
         <div className="text-center mb-8 sm:mb-12 md:mb-16 px-2">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-3 sm:mb-4">
-            Starlink Installation Services
+            Satellite Internet Installation Services
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
             Expert installation for every environment—home, business, sea, or road.
