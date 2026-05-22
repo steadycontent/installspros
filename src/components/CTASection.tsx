@@ -10,7 +10,7 @@ interface CTASectionProps {
   hidePhoneCTA?: boolean;
 }
 
-const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "Ready to Order Starlink?", subheading = "Join thousands of homeowners who trust InstallPros for professional new Starlink installations.", hidePhoneCTA = false }: CTASectionProps) => {
+const CTASection = ({ installCount = "5,000+", statesServed = "37", heading = "Ready for Satellite Internet?", subheading = "Join thousands of homeowners who trust InstallPros for professional satellite internet installations.", hidePhoneCTA = false }: CTASectionProps) => {
   const navigate = useNavigate();
 
   return (
