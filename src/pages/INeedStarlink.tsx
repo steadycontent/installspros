@@ -77,7 +77,7 @@ const INeedStarlink = () => {
                   </div>
                   <div className="w-full p-3 sm:p-4">
                     <span className="block text-base sm:text-xl md:text-2xl font-bold text-white leading-tight uppercase tracking-wide">
-                      I Need Starlink Installation
+                      Get My Quote
                     </span>
                   </div>
                 </button>
