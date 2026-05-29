@@ -86,7 +86,8 @@ export default function FunnelManagerCard() {
                       variant="ghost"
                       size="sm"
                       onClick={async () => {
-                        await navigator.clipboard.writeText(JSON.stringify(f.config, null, 2));
+                        const payload = { ...f.config, meta: { name: f.name, slug: f.slug } };
+                        await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
                         toast({ title: "Copied", description: `${f.name} JSON copied.` });
                       }}
                       title="Copy JSON"
