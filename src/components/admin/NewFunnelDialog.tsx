@@ -164,11 +164,25 @@ export default function NewFunnelDialog({ open, onOpenChange, primaryConfig }: P
               id="funnel-json"
               value={jsonText}
               onChange={(e) => {
-                setJsonText(e.target.value);
+                const text = e.target.value;
+                setJsonText(text);
                 setJsonError(null);
+                // Auto-prefill name/slug from meta if present
+                try {
+                  const parsed = JSON.parse(text);
+                  const metaName = parsed?.meta?.name;
+                  const metaSlug = parsed?.meta?.slug;
+                  if (metaName && !name) setName(String(metaName));
+                  if (metaSlug && !slug) {
+                    setSlug(slugify(String(metaSlug)));
+                    setSlugTouched(true);
+                  }
+                } catch {
+                  /* ignore — user is still typing */
+                }
               }}
               rows={10}
-              placeholder='{"version":1,"branding":{...},"steps":[...],"submit":{...}}'
+              placeholder='{"version":1,"meta":{"name":"...","slug":"..."},"branding":{...},"steps":[...],"submit":{...}}'
               className="font-mono text-xs"
             />
             {jsonError && (
