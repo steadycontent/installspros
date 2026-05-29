@@ -41,6 +41,12 @@ export const FunnelStepSchema = z.discriminatedUnion("type", [
 
 export const FunnelConfigSchema = z.object({
   version: z.literal(1),
+  meta: z
+    .object({
+      name: z.string().max(80).optional(),
+      slug: z.string().max(63).optional(),
+    })
+    .optional(),
   branding: z.object({
     headline: z.string().min(1).max(160),
     subheadline: z.string().max(280).optional().default(""),
