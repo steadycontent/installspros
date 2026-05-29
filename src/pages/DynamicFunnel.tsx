@@ -74,16 +74,16 @@ export default function DynamicFunnel() {
         <title>{state.name} | InstallPros</title>
       </Helmet>
       <Navbar />
-      <main className="min-h-screen bg-background pt-24 pb-12 px-4">
+      <main className="min-h-screen bg-[hsl(var(--dark-bg))] text-white pt-24 pb-12 px-4">
         <div className="max-w-md mx-auto text-center space-y-3 mb-6">
           {branding.badge && (
-            <span className="inline-block text-xs font-medium text-foreground bg-white/10 px-3 py-1 rounded-full">
+            <span className="inline-block text-xs font-medium text-white bg-white/10 px-3 py-1 rounded-full">
               {branding.badge}
             </span>
           )}
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{branding.headline}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">{branding.headline}</h1>
           {branding.subheadline && (
-            <p className="text-sm text-muted-foreground">{branding.subheadline}</p>
+            <p className="text-sm text-white/70">{branding.subheadline}</p>
           )}
         </div>
         <FunnelEngine config={state.config} variantId={slug} />
