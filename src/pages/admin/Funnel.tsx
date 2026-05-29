@@ -34,6 +34,9 @@ export default function AdminFunnel() {
         <DateRangeFilter value={dateRange} onChange={setDateRange} />
       </div>
 
+      <FunnelManagerCard />
+      </div>
+
       {/* Error State */}
       {error && (
         <div className="flex items-center gap-2 p-4 rounded-lg bg-destructive/10 text-destructive">
