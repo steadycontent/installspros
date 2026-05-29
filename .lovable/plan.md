@@ -1,45 +1,106 @@
-## Goal
+# Funnel Builder – Copy/Import JSON + Rapid Deploy
 
-Reduce Starlink trademark/policy exposure across the public site. Prominent product positioning becomes "Satellite Internet / Satellite Internet Installation". Starlink stays only as a compatibility/reference word and in the existing support-link card.
+Goal: from the admin Overview, export the primary homepage funnel as JSON, create new funnels (blank or via JSON import), store them in the DB, and instantly serve them at a custom URL slug.
 
-Scope is **copy + meta only**. No layout, color, form logic, route, value-key, CRM mapping, or backend changes.
+## 1. Database
 
-## What's already done (previous turn)
+New `funnels` table:
 
-Hero headline/subheadline, intent button, footer disclaimer, FeaturesSection titles, CoverageSection heading, SmartHomeSection blurb, FAQSection answers, CTASection heading + compatibility line, EquipmentSection alt text, and Index.tsx + index.html SEO already updated. This plan covers everything else.
+| column | type | notes |
+|---|---|---|
+| id | uuid PK | |
+| slug | text unique | URL-safe, e.g. `solar-tx` → served at `/f/solar-tx` |
+| name | text | Internal label |
+| config | jsonb | Funnel schema (steps, fields, copy, theme) |
+| is_primary | boolean | Marks the homepage funnel (only one true) |
+| is_active | boolean | If false, route returns 404 |
+| created_at / updated_at | timestamptz | |
 
-## Files to update (copy only)
+RLS: admins (`has_role(uid,'admin')`) can do all; `anon` + `authenticated` can `SELECT` only `is_active = true` rows (needed so the public `/f/:slug` page can read the config without auth).
 
-### Public pages
-- `src/pages/Blog.tsx` — post titles/excerpts/slugs stay (content references), but page `<title>` → "Blog | InstallPros — Satellite Internet & Smart Home Tips", meta description → "Expert tips, guides, and news about satellite internet installation and smart home automation.", intro paragraph → "Tips, guides, and news for satellite internet and smart home enthusiasts."
-- `src/pages/Shop.tsx` — page title → "Satellite Internet Equipment & Accessories | InstallPros"; meta description, hero alt, and hero paragraph swap "Starlink" → "satellite internet"; keep import name `starlinkKit` as-is (internal).
-- `src/pages/SmartHome.tsx` — meta description, "Network Integration" desc, and intro paragraph: "Starlink" → "satellite internet" / "satellite internet network".
-- `src/pages/Locations.tsx` — page title → "Service Locations | InstallPros — 37 States Satellite Internet Installation"; meta description swaps "Starlink" → "satellite internet".
-- `src/pages/ContactUs.tsx` — meta description and "Get a custom … quote" bullet swap "Starlink" → "satellite internet".
-- `src/pages/ScheduleCall.tsx` — meta description: "Starlink and smart home" → "satellite internet and smart home".
-- `src/pages/ThankYou.tsx` — WhatsApp prefilled text: "Starlink quote" → "satellite internet quote".
-- `src/pages/TermsAndConditions.tsx` — "Starlink satellite systems" → "satellite internet systems".
-- `src/pages/services/SecuritySystems.tsx` — meta description and hero paragraph: "Starlink" → "satellite internet" / "your satellite internet network".
-- `src/pages/services/SmartThermostats.tsx` — feature card title "Starlink Powered" → "Always Online"; meta description: "Starlink-powered" → "satellite-internet-powered".
-- `src/pages/services/GarageOpeners.tsx` — feature card title "Starlink Connected" → "Always Connected"; description: "Reliable Starlink internet" → "Reliable satellite internet".
+A migration also seeds one row with `slug='primary'`, `is_primary=true`, containing the current hardcoded funnel definition.
 
-### Components (visible copy)
-- `src/components/HeroSection.tsx` — support card label "I Need Starlink help or support" → "I Need Help or Support" (link target/href unchanged, since it correctly points to Starlink's own support site). Comment/alt cleanups are cosmetic.
-- `src/components/FeaturesCarousel.tsx` — card titles "Residential/Commercial/Marine/Mobile/RV Starlink" → "Residential/Commercial/Marine/Mobile-RV Satellite Internet". Image import identifiers stay.
-- `src/components/HeroWithCarousel.tsx` — same renaming for the three carousel titles, plus heading "Complete Starlink Installation Solutions" → "Complete Satellite Internet Installation Solutions" and subline → "Expert nationwide installs with the best pricing on satellite internet hardware and smart home integrations."
-- `src/components/ProfessionalInstallation.tsx` — "We supply and install your Starlink system" → "We supply and install your satellite internet system".
-- `src/components/QuoteForm.tsx` — visible labels "Residential/Commercial/Marine/Mobile/RV Starlink Installation" → "… Satellite Internet Installation". **Option `value` strings stay unchanged** (CRM mapping memory).
-- `src/components/InlineQuoteForm.tsx` — visible labels "Residential/Commercial/Marine/Mobile/RV Starlink" → "… Satellite Internet". **`value` keys (`residential-starlink`, etc.) stay unchanged** to preserve CRM/Zapier mapping.
+## 2. JSON schema (v1)
 
-## Explicitly NOT changing
+```json
+{
+  "version": 1,
+  "name": "Satellite Internet — Primary",
+  "branding": { "headline": "...", "subheadline": "...", "badge": "37 States Nationwide" },
+  "steps": [
+    { "id": "installation_type", "type": "choice-grid",
+      "title": "What type of installation?",
+      "options": [
+        { "value": "residential", "label": "Residential", "icon": "home" },
+        { "value": "commercial", "label": "Commercial", "icon": "building" },
+        { "value": "marine",      "label": "Marine",      "icon": "anchor" },
+        { "value": "mobile",      "label": "Mobile/RV",   "icon": "rv" }
+      ]
+    },
+    { "id": "name",    "type": "text",  "label": "Your name",  "placeholder": "Full name" },
+    { "id": "phone",   "type": "phone", "label": "Phone" },
+    { "id": "email",   "type": "email", "label": "Email" },
+    { "id": "address", "type": "address","label": "Install address" }
+  ],
+  "submit": { "label": "Get My Quote", "redirect": "/thank-you" }
+}
+```
 
-- Dormant variant pages and their components: `Gus.tsx`, `Frank.tsx`, `StarlinkLp1.tsx`, `INeedStarlink.tsx`, `ThankYouGus.tsx`, `GusNavbar.tsx`, `GusValueProps.tsx`, `GusInteractiveCoverageMap.tsx`, `StarlinkHeroSection.tsx`. They are off the active funnel per project memory.
-- Asset filenames/import identifiers (`starlink-kit.jpg`, `starlinkDishCompass`, etc.) — internal only, not user-visible.
-- Admin UI (`admin/google-ads/*`), backend (`supabase/functions/*`, migrations, generated `types.ts`), and lighting modal — no public copy impact.
-- Form `value` keys and CRM job-type mapping — preserved per project memory.
-- The existing Starlink-branded support link card and its `starlink.com/support` href — kept as legitimate reference to the trademark owner's support.
-- Branding colors, layout, responsive behavior, UTM handling, form logic, and tracking — all unchanged.
+The five step types above cover what the current funnel uses. Existing lead-submission logic (Supabase insert + webhook dispatch + partial-lead capture) is reused unchanged — the dynamic renderer just feeds field values into the same payload.
 
-## Verification
+## 3. Dynamic renderer
 
-After edits: `rg -i "starlink" src/pages src/components` should only show: compatibility/reference lines, the support card href + visible "Starlink Support" link text, blog post titles (editorial references), and import identifiers/asset filenames.
+- New page: `src/pages/DynamicFunnel.tsx`, route `/f/:slug`
+  - Fetches the funnel row by slug, renders steps via a `<FunnelEngine config={...}/>` component
+  - 404 if not found / not active
+- New component: `src/components/funnel/FunnelEngine.tsx`
+  - Step-type switch → reuses existing inputs (address autocomplete, phone formatter, validation, partial-lead timers)
+  - On submit, calls the same lead-insert pipeline used by `InlineQuoteFlow`
+
+The existing homepage `InlineQuoteFlow` is left untouched for now (low risk). Optional follow-up: switch homepage to read the `is_primary` row.
+
+## 4. Admin UI changes
+
+On **Overview → Funnel Overview card**:
+
+- **Copy JSON** button → copies the current primary funnel's `config` JSON to clipboard, toast confirms.
+- **New Funnel** button → opens a modal with two tabs:
+
+  **Tab 1 — Blank**
+  - Slug input (auto-slugifies, validates `[a-z0-9-]+`, checks uniqueness)
+  - Funnel name input
+  - Creates a funnel pre-populated with the primary config so it works immediately; user can edit JSON later.
+
+  **Tab 2 — Import JSON**
+  - Slug + name inputs
+  - JSON textarea (with paste + validate button)
+  - Validates against the schema; shows inline errors
+  - Creates the funnel with the imported config.
+
+After creation: toast with a link to `/f/{slug}` (opens in new tab) so the user can instantly preview the deployed page.
+
+A small **Funnels list** appears below the actions showing slug · name · created · open · delete, so admins can manage what they've created.
+
+## 5. Files touched
+
+New:
+- `supabase/migrations/<ts>_create_funnels.sql`
+- `src/components/admin/FunnelManagerCard.tsx` (Copy JSON + New Funnel modal + list)
+- `src/components/admin/NewFunnelDialog.tsx` (tabbed dialog)
+- `src/hooks/useFunnels.ts` (CRUD via supabase-js)
+- `src/components/funnel/FunnelEngine.tsx`
+- `src/pages/DynamicFunnel.tsx`
+- `src/lib/funnels/schema.ts` (Zod validator + types)
+- `src/lib/funnels/primarySeed.ts` (canonical JSON of current funnel)
+
+Edited:
+- `src/pages/admin/Overview.tsx` — mount `<FunnelManagerCard/>` above the Funnel Overview chart
+- `src/App.tsx` — register `/f/:slug` route
+
+## 6. Out of scope (can add later)
+
+- Visual drag-and-drop funnel editor (this PR is JSON in/out only)
+- Per-funnel analytics filtering
+- Switching homepage to render from DB
+
+Confirm and I'll implement.
