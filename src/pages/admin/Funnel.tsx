@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FunnelChart } from "@/components/admin/FunnelChart";
 import { FunnelAIInsights } from "@/components/admin/FunnelAIInsights";
 import { DateRangeFilter } from "@/components/admin/DateRangeFilter";
+import FunnelManagerCard from "@/components/admin/FunnelManagerCard";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 export default function AdminFunnel() {
@@ -32,6 +33,8 @@ export default function AdminFunnel() {
         </div>
         <DateRangeFilter value={dateRange} onChange={setDateRange} />
       </div>
+
+      <FunnelManagerCard />
 
       {/* Error State */}
       {error && (

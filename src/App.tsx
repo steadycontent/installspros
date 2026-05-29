@@ -37,6 +37,7 @@ const GarageOpeners = lazy(() => import("./pages/services/GarageOpeners"));
 const PermanentLighting = lazy(() => import("./pages/PermanentLighting"));
 const INeedStarlink = lazy(() => import("./pages/INeedStarlink"));
 const ThankYouGus = lazy(() => import("./pages/ThankYouGus"));
+const DynamicFunnel = lazy(() => import("./pages/DynamicFunnel"));
 // Admin pages
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -114,6 +115,7 @@ const App = () => (
               <Route path="/permanent-lighting" element={<PermanentLighting />} />
               <Route path="/i-need-starlink" element={<INeedStarlink />} />
               <Route path="/thank-you-gus" element={<ThankYouGus />} />
+              <Route path="/f/:slug" element={<DynamicFunnel />} />
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/reset-password" element={<AdminResetPassword />} />
