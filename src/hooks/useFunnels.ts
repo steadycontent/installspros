@@ -47,15 +47,16 @@ export function useCreateFunnel() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input: { slug: string; name: string; config: FunnelConfig }) => {
+      const payload = {
+        slug: input.slug,
+        name: input.name,
+        config: input.config as unknown as never,
+        is_primary: false,
+        is_active: true,
+      };
       const { data, error } = await supabase
         .from("funnels")
-        .insert({
-          slug: input.slug,
-          name: input.name,
-          config: input.config as unknown as Record<string, unknown>,
-          is_primary: false,
-          is_active: true,
-        })
+        .insert(payload)
         .select("*")
         .single();
       if (error) throw error;
