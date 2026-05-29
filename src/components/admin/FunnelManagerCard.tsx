@@ -18,7 +18,11 @@ export default function FunnelManagerCard() {
       return;
     }
     try {
-      await navigator.clipboard.writeText(JSON.stringify(primary.config, null, 2));
+      const payload = {
+        ...primary.config,
+        meta: { name: primary.name, slug: primary.slug },
+      };
+      await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
       toast({ title: "Copied", description: "Primary funnel JSON copied to clipboard." });
     } catch {
       toast({ title: "Copy failed", description: "Clipboard unavailable.", variant: "destructive" });
