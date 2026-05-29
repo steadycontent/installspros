@@ -35,7 +35,6 @@ export default function AdminFunnel() {
       </div>
 
       <FunnelManagerCard />
-      </div>
 
       {/* Error State */}
       {error && (
