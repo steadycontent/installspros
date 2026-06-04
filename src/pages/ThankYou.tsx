@@ -6,6 +6,7 @@ import StepIndicator from "@/components/StepIndicator";
 import { Camera, Upload, MessageSquare, Send, Loader2, X, Clock } from "lucide-react";
 import { trackLead } from "@/lib/analytics/tracker";
 import { fireGoogleAdsConversion } from "@/lib/googleAds";
+import { setBingUetUserData } from "@/lib/bingUet";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -41,6 +42,8 @@ const ThankYou = () => {
       setQuoteData(data);
       // Track this as a lead in analytics
       trackLead(data.installationType || "unknown");
+      // Fallback Bing UET enhanced conversion data (deduped per-session)
+      setBingUetUserData({ email: data.email, phone: data.phone });
     }
     // Fallback Google Ads conversion fire (deduped per-session via sessionStorage).
     fireGoogleAdsConversion();

@@ -15,6 +15,7 @@ import { useUrlParams } from "@/contexts/UrlParamsContext";
 import { parseAddress } from "@/lib/parseAddress";
 import { trackFunnelStep, trackFormSubmit } from "@/lib/analytics/tracker";
 import { fireGoogleAdsConversion } from "@/lib/googleAds";
+import { setBingUetUserData } from "@/lib/bingUet";
 
 interface PlacePrediction {
   placeId: string;
@@ -687,6 +688,10 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
 
       // Fire Google Ads conversion (deduped per-session)
       fireGoogleAdsConversion();
+
+      // Push enhanced conversion data to Bing UET (deduped per-session)
+      setBingUetUserData({ email: formData.email, phone: formData.phone });
+
 
       navigate("/thank-you");
     } catch {
