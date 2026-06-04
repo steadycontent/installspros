@@ -689,6 +689,10 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
       // Fire Google Ads conversion (deduped per-session)
       fireGoogleAdsConversion();
 
+      // Push enhanced conversion data to Bing UET (deduped per-session)
+      setBingUetUserData({ email: formData.email, phone: formData.phone });
+
+
       navigate("/thank-you");
     } catch {
       hasSubmittedRef.current = false; // Allow retry on error
