@@ -42,6 +42,8 @@ const ThankYou = () => {
       setQuoteData(data);
       // Track this as a lead in analytics
       trackLead(data.installationType || "unknown");
+      // Fallback Bing UET enhanced conversion data (deduped per-session)
+      setBingUetUserData({ email: data.email, phone: data.phone });
     }
     // Fallback Google Ads conversion fire (deduped per-session via sessionStorage).
     fireGoogleAdsConversion();
