@@ -15,6 +15,7 @@ import { useUrlParams } from "@/contexts/UrlParamsContext";
 import { parseAddress } from "@/lib/parseAddress";
 import { trackFunnelStep, trackFormSubmit } from "@/lib/analytics/tracker";
 import { fireGoogleAdsConversion } from "@/lib/googleAds";
+import { setBingUetUserData } from "@/lib/bingUet";
 
 interface PlacePrediction {
   placeId: string;
