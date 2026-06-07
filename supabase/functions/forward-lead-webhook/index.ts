@@ -284,7 +284,7 @@ const handler = async (req: Request): Promise<Response> => {
           Authorization: `Bearer ${supabaseServiceKey}`,
         },
         body: JSON.stringify({
-          trigger_event: "lead_created",
+          trigger_event: leadData.is_partial ? "lead_partial_submitted" : "lead_created",
           payload: ghlPayload,
         }),
       })
