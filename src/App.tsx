@@ -117,7 +117,7 @@ const App = () => (
               <Route path="/i-need-starlink" element={<INeedStarlink />} />
               <Route path="/thank-you-gus" element={<ThankYouGus />} />
               <Route path="/f/:slug" element={<DynamicFunnel />} />
-              <Route path="/proposals/JSON-70-unit" element={<RvResort70Unit />} />
+              <Route path="/proposals/JASON-70-unit" element={<RvResort70Unit />} />
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/reset-password" element={<AdminResetPassword />} />
