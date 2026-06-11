@@ -38,6 +38,7 @@ const PermanentLighting = lazy(() => import("./pages/PermanentLighting"));
 const INeedStarlink = lazy(() => import("./pages/INeedStarlink"));
 const ThankYouGus = lazy(() => import("./pages/ThankYouGus"));
 const DynamicFunnel = lazy(() => import("./pages/DynamicFunnel"));
+const RvResort70Unit = lazy(() => import("./pages/proposals/RvResort70Unit"));
 // Admin pages
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -116,6 +117,7 @@ const App = () => (
               <Route path="/i-need-starlink" element={<INeedStarlink />} />
               <Route path="/thank-you-gus" element={<ThankYouGus />} />
               <Route path="/f/:slug" element={<DynamicFunnel />} />
+              <Route path="/proposals/JSON-70-unit" element={<RvResort70Unit />} />
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/reset-password" element={<AdminResetPassword />} />
