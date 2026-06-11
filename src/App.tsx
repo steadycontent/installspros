@@ -38,6 +38,7 @@ const PermanentLighting = lazy(() => import("./pages/PermanentLighting"));
 const INeedStarlink = lazy(() => import("./pages/INeedStarlink"));
 const ThankYouGus = lazy(() => import("./pages/ThankYouGus"));
 const DynamicFunnel = lazy(() => import("./pages/DynamicFunnel"));
+const RvResort70Unit = lazy(() => import("./pages/proposals/RvResort70Unit"));
 // Admin pages
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
