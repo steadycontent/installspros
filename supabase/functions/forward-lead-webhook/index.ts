@@ -28,6 +28,8 @@ interface LeadData {
   session_id?: string;
   device_type?: string;
   landing_host?: string;
+  lead_type?: string;
+  property_meta?: Record<string, unknown>;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -68,6 +70,8 @@ const handler = async (req: Request): Promise<Response> => {
       session_id: sanitize(raw.session_id, 100),
       device_type: deviceType,
       landing_host: sanitize(raw.landing_host, 253).toLowerCase(),
+      lead_type: ["residential", "commercial"].includes(raw.lead_type) ? raw.lead_type : "residential",
+      property_meta: raw.property_meta && typeof raw.property_meta === "object" ? raw.property_meta : undefined,
     };
 
     const fullAddress = [leadData.street, leadData.city, leadData.state, leadData.zip]
@@ -110,6 +114,8 @@ const handler = async (req: Request): Promise<Response> => {
       session_id: leadData.session_id || null,
       device_type: leadData.device_type || null,
       landing_host: leadData.landing_host || null,
+      lead_type: leadData.lead_type || "residential",
+      property_meta: leadData.property_meta ?? null,
     });
 
     if (dbError) {
