@@ -40,6 +40,7 @@ const ThankYouGus = lazy(() => import("./pages/ThankYouGus"));
 const DynamicFunnel = lazy(() => import("./pages/DynamicFunnel"));
 const RvResort70Unit = lazy(() => import("./pages/proposals/RvResort70Unit"));
 const Residential = lazy(() => import("./pages/Residential"));
+const Commercial = lazy(() => import("./pages/Commercial"));
 const Assessment = lazy(() => import("./pages/Assessment"));
 const ThankYouAssessment = lazy(() => import("./pages/ThankYouAssessment"));
 const IndustryPage = lazy(() => import("./pages/industries/IndustryPage"));
@@ -123,6 +124,7 @@ const App = () => (
               <Route path="/f/:slug" element={<DynamicFunnel />} />
               <Route path="/proposals/JASON-70-unit" element={<RvResort70Unit />} />
               <Route path="/residential" element={<Residential />} />
+              <Route path="/commercial" element={<Commercial />} />
               <Route path="/assessment" element={<Assessment />} />
               <Route path="/thank-you-assessment" element={<ThankYouAssessment />} />
               <Route path="/industries/:slug" element={<IndustryPage />} />
