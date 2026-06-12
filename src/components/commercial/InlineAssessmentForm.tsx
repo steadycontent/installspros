@@ -316,13 +316,30 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
           <div className="relative mt-6 group">
             <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
             <Input
-              type={current.type}
+              type={current.type === "tel" ? "tel" : current.type}
+              inputMode={
+                current.key === "sites" || current.key === "acreage" || current.type === "tel"
+                  ? "numeric"
+                  : undefined
+              }
+              maxLength={current.type === "tel" ? 14 : current.key === "sites" || current.key === "acreage" ? 3 : undefined}
               placeholder={current.placeholder}
               value={data[current.key]}
               onChange={(e) => {
-                setData({ ...data, [current.key]: e.target.value });
+                let v = e.target.value;
+                if (current.key === "sites" || current.key === "acreage") {
+                  v = v.replace(/\D/g, "").slice(0, 3);
+                } else if (current.type === "tel") {
+                  const d = v.replace(/\D/g, "").slice(0, 10);
+                  if (d.length > 6) v = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+                  else if (d.length > 3) v = `(${d.slice(0,3)}) ${d.slice(3)}`;
+                  else if (d.length > 0) v = `(${d}`;
+                  else v = "";
+                }
+                setData({ ...data, [current.key]: v });
                 setErrors({});
               }}
+
               onKeyDown={onKey}
               data-hj-allow
               autoFocus
