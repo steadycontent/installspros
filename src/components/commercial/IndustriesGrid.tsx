@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { INDUSTRIES } from "@/lib/industries";
 
 const IndustriesGrid = () => (
-  <section className="bg-dark-bg text-white py-16 md:py-24">
+  <section id="industries" className="bg-dark-bg text-white py-16 md:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
         <div className="max-w-2xl">

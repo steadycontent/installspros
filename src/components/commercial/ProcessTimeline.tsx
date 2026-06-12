@@ -9,7 +9,7 @@ const steps = [
 ];
 
 const ProcessTimeline = () => (
-  <section className="bg-background py-16 md:py-24">
+  <section id="process" className="bg-background py-16 md:py-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
       <div className="max-w-2xl mb-12">
         <p className="text-xs uppercase tracking-[0.18em] text-primary font-semibold mb-3">
