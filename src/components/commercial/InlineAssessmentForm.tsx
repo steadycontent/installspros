@@ -196,8 +196,22 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
       sessionStorage.setItem("leadEmail", data.email);
 
       if (supabase) {
-        await supabase.functions.invoke("forward-lead-webhook", { body: payload });
+        await Promise.allSettled([
+          supabase.functions.invoke("forward-lead-webhook", { body: payload }),
+          supabase.functions.invoke("send-assessment-email", {
+            body: {
+              email: data.email,
+              propertyName: data.propertyName,
+              industry: data.industry,
+              sites: data.sites,
+              acreage: data.acreage,
+              currentIsp: data.currentIsp,
+              phone: data.phone,
+            },
+          }),
+        ]);
       }
+
 
       toast({
         title: "Assessment requested",
