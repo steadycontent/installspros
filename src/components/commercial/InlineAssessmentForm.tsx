@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { INDUSTRIES } from "@/lib/industries";
 import { trackFunnelStep } from "@/lib/analytics/tracker";
+// trackFunnelStep takes a step number
 
 interface AssessmentData {
   propertyName: string;
@@ -110,7 +111,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
 
   const next = () => {
     if (!validate()) return;
-    trackFunnelStep(`assessment_${current.key}_complete`);
+    trackFunnelStep(step + 1, { funnel: "assessment", field: current.key });
     if (step < STEPS.length - 1) {
       setStep((s) => s + 1);
     } else {
