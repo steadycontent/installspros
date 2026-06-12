@@ -57,17 +57,29 @@ interface Step {
   key: StepKey;
   title: string;
   subtitle: string;
-  type: "text" | "tel" | "email" | "select";
+  type: "text" | "tel" | "email" | "select" | "choice";
   placeholder?: string;
   icon: typeof Building2;
+  options?: { value: string; label: string }[];
 }
+
+const ISP_OPTIONS = [
+  { value: "none", label: "None" },
+  { value: "cable", label: "Cable" },
+  { value: "fiber", label: "Fiber" },
+  { value: "satellite", label: "Satellite" },
+  { value: "fixed-wireless", label: "Fixed Wireless" },
+  { value: "dsl", label: "DSL" },
+  { value: "cellular", label: "Cellular / Hotspot" },
+  { value: "other", label: "Other" },
+];
 
 const STEPS: Step[] = [
   { key: "propertyName", title: "What's the property's name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
   { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine. (Optional)", type: "text", placeholder: "120", icon: Hash },
   { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine. (Optional)", type: "text", placeholder: "35", icon: Trees },
-  { key: "currentIsp", title: "Who's your current ISP?", subtitle: "Or skip if you don't have one. (Optional)", type: "text", placeholder: "Comcast Business", icon: Wifi },
+  { key: "currentIsp", title: "What's your current internet situation?", subtitle: "Pick the closest match.", type: "choice", icon: Wifi, options: ISP_OPTIONS },
   { key: "phone", title: "Best phone for a callback?", subtitle: "We'll schedule the assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
   { key: "email", title: "Where should we send your plan?", subtitle: "We'll email the assessment summary.", type: "email", placeholder: "you@property.com", icon: Mail },
 ];
