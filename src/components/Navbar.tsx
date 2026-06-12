@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Industries", href: "/#industries" },
-    { label: "Calculator", href: "/#calculator" },
+    { label: "Commercial", href: "/commercial" },
     { label: "Process", href: "/#process" },
     { label: "Residential", href: "/residential" },
     { label: "Contact", href: "/contact-us" },
