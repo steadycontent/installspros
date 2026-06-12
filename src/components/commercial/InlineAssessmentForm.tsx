@@ -261,6 +261,27 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
               </button>
             ))}
           </div>
+        ) : current.type === "choice" ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+            {current.options?.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => {
+                  setData({ ...data, [current.key]: opt.value });
+                  setErrors({});
+                }}
+                className={cn(
+                  "p-4 rounded-[4px] border-2 text-center font-semibold text-sm transition-all",
+                  data[current.key] === opt.value
+                    ? "border-primary bg-primary/20"
+                    : "border-white/15 bg-white/5 hover:border-white/30"
+                )}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         ) : (
           <div className="relative mt-6 group">
             <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
