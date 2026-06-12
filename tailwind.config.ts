@@ -54,6 +54,8 @@ export default {
           DEFAULT: "hsl(var(--dark-bg))",
           surface: "hsl(var(--dark-surface))",
         },
+        "dark-bg": "hsl(var(--dark-bg))",
+        "dark-surface": "hsl(var(--dark-surface))",
       },
       borderRadius: {
         lg: "var(--radius)",
