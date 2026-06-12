@@ -19,9 +19,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Locations", href: "/locations" },
-    { label: "Contact Us", href: "/contact-us" },
+    { label: "Industries", href: "/#industries" },
+    { label: "Calculator", href: "/#calculator" },
+    { label: "Process", href: "/#process" },
+    { label: "Residential", href: "/residential" },
+    { label: "Contact", href: "/contact-us" },
   ];
 
   return (
