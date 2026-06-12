@@ -152,10 +152,17 @@
   }
 
   /* Text Overflow Safety */
-  p, h1, h2, h3, h4, h5, h6, a, button, span, li, td, th {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    hyphens: auto;
+  p, a, button, span, li, td, th {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  /* Headings: never break inside words */
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   /* Prevent children from forcing overflow */
