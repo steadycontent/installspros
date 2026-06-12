@@ -35,21 +35,40 @@ const initial: AssessmentData = {
 };
 
 const schemas = {
-  propertyName: z.string().trim().min(2, "Enter your property name"),
+  propertyName: z.string().trim().min(2, "Enter the property or business name"),
   industry: z.string().min(1, "Select an industry"),
   sites: z
     .string()
     .trim()
     .optional()
     .refine(
-      (v) => !v || !Number.isNaN(Number(v.replace(/[^0-9]/g, ""))),
-      "Enter a number"
+      (v) => {
+        if (!v) return true;
+        const n = Number(v);
+        return /^\d+$/.test(v) && n >= 0 && n <= 999;
+      },
+      "Numbers only, max 999"
     ),
-  acreage: z.string().trim().optional(),
+  acreage: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (v) => {
+        if (!v) return true;
+        const n = Number(v);
+        return /^\d+$/.test(v) && n >= 0 && n <= 999;
+      },
+      "Numbers only, max 999"
+    ),
   currentIsp: z.string().trim().optional(),
-  phone: z.string().trim().min(10, "Enter a valid phone number"),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => v.replace(/\D/g, "").length >= 10, "Enter a valid 10-digit phone"),
   email: z.string().trim().email("Enter a valid email"),
 } as const;
+
 
 type StepKey = keyof AssessmentData;
 
@@ -64,18 +83,14 @@ interface Step {
 }
 
 const ISP_OPTIONS = [
-  { value: "none", label: "None" },
   { value: "cable", label: "Cable" },
   { value: "fiber", label: "Fiber" },
   { value: "satellite", label: "Satellite" },
-  { value: "fixed-wireless", label: "Fixed Wireless" },
-  { value: "dsl", label: "DSL" },
-  { value: "cellular", label: "Cellular / Hotspot" },
   { value: "other", label: "Other" },
 ];
 
 const STEPS: Step[] = [
-  { key: "propertyName", title: "What's the property's name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
+  { key: "propertyName", title: "What's the property or business name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
   { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine. (Optional)", type: "text", placeholder: "120", icon: Hash },
   { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine. (Optional)", type: "text", placeholder: "35", icon: Trees },
@@ -83,6 +98,7 @@ const STEPS: Step[] = [
   { key: "phone", title: "Best phone for a callback?", subtitle: "We'll schedule the assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
   { key: "email", title: "Where should we send your plan?", subtitle: "We'll email the assessment summary.", type: "email", placeholder: "you@property.com", icon: Mail },
 ];
+
 
 interface Props {
   className?: string;
@@ -180,8 +196,22 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
       sessionStorage.setItem("leadEmail", data.email);
 
       if (supabase) {
-        await supabase.functions.invoke("forward-lead-webhook", { body: payload });
+        await Promise.allSettled([
+          supabase.functions.invoke("forward-lead-webhook", { body: payload }),
+          supabase.functions.invoke("send-assessment-email", {
+            body: {
+              email: data.email,
+              propertyName: data.propertyName,
+              industry: data.industry,
+              sites: data.sites,
+              acreage: data.acreage,
+              currentIsp: data.currentIsp,
+              phone: data.phone,
+            },
+          }),
+        ]);
       }
+
 
       toast({
         title: "Assessment requested",
@@ -286,13 +316,30 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
           <div className="relative mt-6 group">
             <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
             <Input
-              type={current.type}
+              type={current.type === "tel" ? "tel" : current.type}
+              inputMode={
+                current.key === "sites" || current.key === "acreage" || current.type === "tel"
+                  ? "numeric"
+                  : undefined
+              }
+              maxLength={current.type === "tel" ? 14 : current.key === "sites" || current.key === "acreage" ? 3 : undefined}
               placeholder={current.placeholder}
               value={data[current.key]}
               onChange={(e) => {
-                setData({ ...data, [current.key]: e.target.value });
+                let v = e.target.value;
+                if (current.key === "sites" || current.key === "acreage") {
+                  v = v.replace(/\D/g, "").slice(0, 3);
+                } else if (current.type === "tel") {
+                  const d = v.replace(/\D/g, "").slice(0, 10);
+                  if (d.length > 6) v = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+                  else if (d.length > 3) v = `(${d.slice(0,3)}) ${d.slice(3)}`;
+                  else if (d.length > 0) v = `(${d}`;
+                  else v = "";
+                }
+                setData({ ...data, [current.key]: v });
                 setErrors({});
               }}
+
               onKeyDown={onKey}
               data-hj-allow
               autoFocus
