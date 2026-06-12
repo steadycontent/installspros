@@ -54,11 +54,11 @@ const CommercialHero = () => {
         <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
-            30,000+ installs nationwide
+            Over 8,000 installs nationwide
           </div>
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
-            Licensed in 37 states
+            Operating in all 50 states
           </div>
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
