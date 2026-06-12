@@ -181,8 +181,8 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "mobile-home-parks",
-    label: "Mobile Home Communities",
-    shortLabel: "Mobile Home",
+    label: "Winery / Equestrian",
+    shortLabel: "Winery / Equestrian",
     image: mobileHome,
     tagline: "Property-wide internet as a community amenity.",
     headline: "Internet Infrastructure for Mobile Home Communities",
@@ -218,8 +218,8 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "large-properties",
-    label: "Resorts & Large Properties",
-    shortLabel: "Large Properties",
+    label: "Other Large Property",
+    shortLabel: "Other Large Property",
     image: largeProps,
     tagline: "Resorts, wineries, retreats, venues, and acreage.",
     headline: "Connectivity for Large Properties That Refuse to Compromise",
