@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import heroImage from "@/assets/commercial/hero-rv-resort-coverage.jpg";
 
 const CommercialHero = () => {
