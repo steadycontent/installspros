@@ -41,20 +41,13 @@ const CommercialHero = () => {
           for RV parks, resorts, campgrounds, marinas, and large properties.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-xl">
+        <div className="mt-8 max-w-xl">
           <Link
             to="/assessment"
-            className="inline-flex items-center justify-center gap-2 rounded-[4px] bg-primary text-primary-foreground h-14 px-6 font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+            className="group inline-flex items-center justify-center gap-3 rounded-[4px] bg-primary text-primary-foreground h-16 px-8 text-base md:text-lg font-bold hover:bg-primary/90 transition-all shadow-2xl shadow-primary/40 hover:shadow-primary/60 hover:scale-[1.02] w-full sm:w-auto"
           >
             Get Free Property Assessment
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link
-            to="/calculator"
-            className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-white/20 bg-white/5 backdrop-blur h-14 px-6 font-semibold text-white hover:bg-white/10 transition-colors"
-          >
-            <Calculator className="w-4 h-4" />
-            Calculate Revenue Impact
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
