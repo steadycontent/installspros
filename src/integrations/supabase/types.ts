@@ -424,8 +424,10 @@ export type Database = {
           installation_type: string | null
           is_partial: boolean | null
           landing_host: string | null
+          lead_type: string
           name: string | null
           phone: string | null
+          property_meta: Json | null
           session_id: string | null
           state: string | null
           street: string | null
@@ -449,8 +451,10 @@ export type Database = {
           installation_type?: string | null
           is_partial?: boolean | null
           landing_host?: string | null
+          lead_type?: string
           name?: string | null
           phone?: string | null
+          property_meta?: Json | null
           session_id?: string | null
           state?: string | null
           street?: string | null
@@ -474,8 +478,10 @@ export type Database = {
           installation_type?: string | null
           is_partial?: boolean | null
           landing_host?: string | null
+          lead_type?: string
           name?: string | null
           phone?: string | null
+          property_meta?: Json | null
           session_id?: string | null
           state?: string | null
           street?: string | null
