@@ -33,9 +33,11 @@ const IndustriesGrid = () => (
               <img
                 src={industry.image}
                 alt={industry.label}
-                loading="lazy"
-                width={1280}
-                height={832}
+                loading="eager"
+                decoding="async"
+                fetchPriority="low"
+                width={1100}
+                height={715}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
