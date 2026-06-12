@@ -40,10 +40,13 @@ const schemas = {
   sites: z
     .string()
     .trim()
-    .min(1, "Required")
-    .refine((v) => !Number.isNaN(Number(v.replace(/[^0-9]/g, ""))), "Enter a number"),
-  acreage: z.string().trim().min(1, "Required"),
-  currentIsp: z.string().trim().min(2, "Required (or type 'None')"),
+    .optional()
+    .refine(
+      (v) => !v || !Number.isNaN(Number(v.replace(/[^0-9]/g, ""))),
+      "Enter a number"
+    ),
+  acreage: z.string().trim().optional(),
+  currentIsp: z.string().trim().optional(),
   phone: z.string().trim().min(10, "Enter a valid phone number"),
   email: z.string().trim().email("Enter a valid email"),
 } as const;
@@ -62,9 +65,9 @@ interface Step {
 const STEPS: Step[] = [
   { key: "propertyName", title: "What's the property's name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
-  { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine.", type: "text", placeholder: "120", icon: Hash },
-  { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine.", type: "text", placeholder: "35", icon: Trees },
-  { key: "currentIsp", title: "Who's your current ISP?", subtitle: "Or 'None' if you don't have one.", type: "text", placeholder: "Comcast Business", icon: Wifi },
+  { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine. (Optional)", type: "text", placeholder: "120", icon: Hash },
+  { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine. (Optional)", type: "text", placeholder: "35", icon: Trees },
+  { key: "currentIsp", title: "Who's your current ISP?", subtitle: "Or skip if you don't have one. (Optional)", type: "text", placeholder: "Comcast Business", icon: Wifi },
   { key: "phone", title: "Best phone for a callback?", subtitle: "We'll schedule the assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
   { key: "email", title: "Where should we send your plan?", subtitle: "We'll email the assessment summary.", type: "email", placeholder: "you@property.com", icon: Mail },
 ];
