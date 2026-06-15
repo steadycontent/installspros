@@ -1,52 +1,39 @@
-## Goal
+## Scope
 
-Split webhook routing per form so each funnel posts to its own Zapier destination, while keeping the existing GHL / LeadConnector fan-out unchanged for both.
+Only the `/assessment` form (commercial leads). Residential/homepage payloads untouched.
 
-| Form | Lives in | Zapier destination |
-|---|---|---|
-| Homepage quote funnel (and anywhere `InlineQuoteFlow` / `FunnelEngine` is used — `/`, `/gus`, `/frank`, `/i-need-starlink`, `/starlink-lp1`, etc.) | `src/components/InlineQuoteFlow.tsx`, `src/components/funnel/FunnelEngine.tsx` | `https://hooks.zapier.com/hooks/catch/218580/ul3oa6g/` (current `ZAPIER_LEAD_INGEST`) |
-| Commercial assessment (`/assessment`, `/commercial`, industry pages) | `src/components/commercial/InlineAssessmentForm.tsx` | `https://hooks.zapier.com/hooks/catch/218580/43z96cx/` (new) |
+## Problem
 
-GHL webhook #1, GHL webhook #2, `LEADCONNECTOR_WEBHOOK_URL`, and `dispatch-webhooks` continue to fire for **both** forms — unchanged.
+`InlineAssessmentForm.tsx` sends assessment answers nested under `property_meta`:
+`property_name`, `industry`, `sites`, `acreage`, `current_isp`.
 
-## How it works today
+`forward-lead-webhook/index.ts` forwards core lead fields (name/email/phone/address/utm) to Zapier/LeadConnector/GHL but never flattens `property_meta`, so Zapier only sees the basics.
 
-All three call sites hit one edge function: `forward-lead-webhook`. That function fans out to every destination on every submission, with no awareness of which form the submission came from.
+## Fix
 
-## Changes
+In `supabase/functions/forward-lead-webhook/index.ts`, when `leadData.lead_type === "commercial"`, merge the `property_meta` fields as top-level keys into all outbound payloads. Residential payloads stay exactly as they are today.
 
-### 1. Tag submissions with their source
-- Already in the payload: `lead_type` is `"residential"` for the homepage funnel and `"commercial"` for the assessment form (`InlineAssessmentForm.tsx` line ~177 sets this). We'll use that as the routing key — no client changes required.
-- Sanity-check: `InlineQuoteFlow.tsx` and `FunnelEngine.tsx` do not set `lead_type`, so it defaults to `"residential"` in the edge function (line 71 of `forward-lead-webhook/index.ts`). That's what we want.
+### Implementation
 
-### 2. Add a new secret for the assessment Zapier URL
-- Create secret `ZAPIER_ASSESSMENT_INGEST` = `https://hooks.zapier.com/hooks/catch/218580/43z96cx/`.
+Add once near the payload builders:
 
-### 3. Overwrite the homepage Zapier secret to be safe
-- Update `ZAPIER_LEAD_INGEST` to `https://hooks.zapier.com/hooks/catch/218580/ul3oa6g/`.
+```ts
+const assessmentFields = isCommercial ? {
+  property_name: String(leadData.property_meta?.property_name ?? ""),
+  industry:      String(leadData.property_meta?.industry ?? ""),
+  sites:         String(leadData.property_meta?.sites ?? ""),
+  acreage:       String(leadData.property_meta?.acreage ?? ""),
+  current_isp:   String(leadData.property_meta?.current_isp ?? ""),
+} : {};
+```
 
-### 4. Update `supabase/functions/forward-lead-webhook/index.ts`
-- Read both Zapier secrets at startup.
-- Pick the URL by `lead_type`:
-  - `commercial` → `ZAPIER_ASSESSMENT_INGEST`
-  - anything else → `ZAPIER_LEAD_INGEST`
-- Log which destination was selected (`[forward-lead-webhook] Zapier route: commercial → ...43z96cx/`).
-- If the chosen secret is missing, warn and skip that one webhook (do not fall back to the other Zapier URL — leads should never cross funnels).
-- Leave LeadConnector, both hardcoded GHL webhooks, and `dispatch-webhooks` untouched so they keep firing for every submission.
+Spread `...assessmentFields` into:
+1. `zapierPayload.data` (will hit `ZAPIER_ASSESSMENT_INGEST` — hook `43z96cx`)
+2. `leadConnectorPayload`
+3. `ghlPayload` (used by both GHL webhooks and `dispatch-webhooks`)
 
-### 5. No frontend changes
-- `InlineAssessmentForm.tsx`, `InlineQuoteFlow.tsx`, and `FunnelEngine.tsx` continue calling `forward-lead-webhook` as today. All routing is server-side.
+DB insert already stores the nested `property_meta` — no change there.
 
 ## Verification
 
-- After deploy, submit a test lead from the homepage funnel → confirm a Zap run on `ul3oa6g`, none on `43z96cx`.
-- Submit a test lead from `/assessment` → confirm a Zap run on `43z96cx`, none on `ul3oa6g`.
-- Confirm both submissions still appear in GHL (LeadConnector + both hardcoded GHL hooks) and in the `leads` table.
-- Check edge function logs for the `Zapier route:` line to verify the branching logic.
-
-## Files touched
-
-- `supabase/functions/forward-lead-webhook/index.ts` — routing logic only
-- Secrets: add `ZAPIER_ASSESSMENT_INGEST`, update `ZAPIER_LEAD_INGEST`
-
-No database migrations, no frontend changes.
+Submit `/assessment` once → check Zapier run history for `43z96cx` → confirm `property_name`, `industry`, `sites`, `acreage`, `current_isp` appear as top-level fields under `data`. Submit homepage funnel once → confirm hook `ul3oa6g` payload is unchanged (no new keys).

@@ -132,6 +132,17 @@ const handler = async (req: Request): Promise<Response> => {
     console.log(`[forward-lead-webhook] Zapier route: ${leadData.lead_type} → ${zapierSecretName}`);
     const leadConnectorUrl = Deno.env.get("LEADCONNECTOR_WEBHOOK_URL");
 
+    const pm = (leadData.property_meta ?? {}) as Record<string, unknown>;
+    const assessmentFields = isCommercial
+      ? {
+          property_name: String(pm.property_name ?? ""),
+          industry: String(pm.industry ?? ""),
+          sites: String(pm.sites ?? ""),
+          acreage: String(pm.acreage ?? ""),
+          current_isp: String(pm.current_isp ?? ""),
+        }
+      : {};
+
     const zapierPayload = {
       event_type: "lead.created",
       timestamp: new Date().toISOString(),
