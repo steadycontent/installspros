@@ -137,11 +137,13 @@ const handler = async (req: Request): Promise<Response> => {
       ? {
           property_name: String(pm.property_name ?? ""),
           industry: String(pm.industry ?? ""),
+          commercial_type: String(pm.commercial_type ?? ""),
           sites: String(pm.sites ?? ""),
           acreage: String(pm.acreage ?? ""),
           current_isp: String(pm.current_isp ?? ""),
         }
       : {};
+
 
     const zapierPayload = {
       event_type: "lead.created",
