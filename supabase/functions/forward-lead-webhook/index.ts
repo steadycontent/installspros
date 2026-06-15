@@ -124,7 +124,12 @@ const handler = async (req: Request): Promise<Response> => {
       console.log("Lead saved to database");
     }
 
-    const zapierLeadIngestUrl = Deno.env.get("ZAPIER_LEAD_INGEST");
+    const isCommercial = leadData.lead_type === "commercial";
+    const zapierLeadIngestUrl = isCommercial
+      ? Deno.env.get("ZAPIER_ASSESSMENT_INGEST")
+      : Deno.env.get("ZAPIER_LEAD_INGEST");
+    const zapierSecretName = isCommercial ? "ZAPIER_ASSESSMENT_INGEST" : "ZAPIER_LEAD_INGEST";
+    console.log(`[forward-lead-webhook] Zapier route: ${leadData.lead_type} → ${zapierSecretName}`);
     const leadConnectorUrl = Deno.env.get("LEADCONNECTOR_WEBHOOK_URL");
 
     const zapierPayload = {
