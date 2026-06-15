@@ -260,6 +260,7 @@ const handler = async (req: Request): Promise<Response> => {
       is_partial: leadData.is_partial || false,
       device_type: leadData.device_type || "",
       submitted_at: new Date().toISOString(),
+      ...assessmentFields,
     };
 
     // Secondary GHL webhook (new automation in GoHighLevel)
