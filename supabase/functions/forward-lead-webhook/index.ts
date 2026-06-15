@@ -200,7 +200,7 @@ const handler = async (req: Request): Promise<Response> => {
           })
       );
     } else {
-      console.warn("ZAPIER_LEAD_INGEST not configured, skipping Zapier");
+      console.warn(`${zapierSecretName} not configured, skipping Zapier`);
     }
 
     if (leadConnectorUrl) {
