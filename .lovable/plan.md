@@ -1,39 +1,21 @@
-## Scope
+Update the assessment form Step 2 (industry selection) to match the provided screenshot.
 
-Only the `/assessment` form (commercial leads). Residential/homepage payloads untouched.
+**Changes:**
+1. Add a `STEP2_OPTIONS` constant in `src/components/commercial/InlineAssessmentForm.tsx` with four custom options:
+   - "RV Park, Motorcoach, Campground" (maps to slug `rv-parks`)
+   - "Marinas" (maps to slug `marinas`)
+   - "Winery / Equestrian" (maps to slug `mobile-home-parks`)
+   - "Other Large Property" (maps to slug `large-properties`)
+   Each option has a custom tagline matching the screenshot.
 
-## Problem
+2. Replace the `INDUSTRIES.map()` rendering in the `select` step with `STEP2_OPTIONS.map()`.
 
-`InlineAssessmentForm.tsx` sends assessment answers nested under `property_meta`:
-`property_name`, `industry`, `sites`, `acreage`, `current_isp`.
+3. Change the grid layout from `grid-cols-2 md:grid-cols-3` to `grid-cols-2` so all breakpoints show a 2×2 grid.
 
-`forward-lead-webhook/index.ts` forwards core lead fields (name/email/phone/address/utm) to Zapier/LeadConnector/GHL but never flattens `property_meta`, so Zapier only sees the basics.
+4. Handle selection state so the combined "RV Park, Motorcoach, Campground" option also appears selected if the underlying value is `campgrounds` or `motorcoach-resorts`.
 
-## Fix
-
-In `supabase/functions/forward-lead-webhook/index.ts`, when `leadData.lead_type === "commercial"`, merge the `property_meta` fields as top-level keys into all outbound payloads. Residential payloads stay exactly as they are today.
-
-### Implementation
-
-Add once near the payload builders:
-
-```ts
-const assessmentFields = isCommercial ? {
-  property_name: String(leadData.property_meta?.property_name ?? ""),
-  industry:      String(leadData.property_meta?.industry ?? ""),
-  sites:         String(leadData.property_meta?.sites ?? ""),
-  acreage:       String(leadData.property_meta?.acreage ?? ""),
-  current_isp:   String(leadData.property_meta?.current_isp ?? ""),
-} : {};
-```
-
-Spread `...assessmentFields` into:
-1. `zapierPayload.data` (will hit `ZAPIER_ASSESSMENT_INGEST` — hook `43z96cx`)
-2. `leadConnectorPayload`
-3. `ghlPayload` (used by both GHL webhooks and `dispatch-webhooks`)
-
-DB insert already stores the nested `property_meta` — no change there.
-
-## Verification
-
-Submit `/assessment` once → check Zapier run history for `43z96cx` → confirm `property_name`, `industry`, `sites`, `acreage`, `current_isp` appear as top-level fields under `data`. Submit homepage funnel once → confirm hook `ul3oa6g` payload is unchanged (no new keys).
+**Verification:**
+- Open `/assessment` and advance to Step 2.
+- Confirm four cards appear in a 2×2 grid with the exact labels and taglines from the screenshot.
+- Confirm selection highlight (primary border + bg-primary/20) works on click.
+- Confirm Continue and Back navigation still function.
