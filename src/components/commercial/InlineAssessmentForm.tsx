@@ -168,6 +168,14 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
       let utm: Record<string, string> = {};
       try { utm = JSON.parse(sessionStr); } catch { /* noop */ }
 
+      const commercialTypeMap: Record<string, string> = {
+        "rv-parks": "Commercial-RVPark",
+        "marinas": "Commercial-Marina",
+        "mobile-home-parks": "Commercial-WineryEquestrian",
+        "large-properties": "Commercial-Other",
+      };
+      const installationType = commercialTypeMap[data.industry] || "Commercial-Other";
+
       const payload = {
         name: data.propertyName,
         email: data.email,
@@ -176,7 +184,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         city: "",
         state: "",
         zip: "",
-        installationType: `commercial-${data.industry || "property"}`,
+        installationType,
         lead_type: "commercial",
         property_meta: {
           property_name: data.propertyName,
