@@ -189,6 +189,7 @@ const handler = async (req: Request): Promise<Response> => {
       gclid: leadData.gclid || "",
       is_partial: leadData.is_partial || false,
       device_type: leadData.device_type || "",
+      ...assessmentFields,
     };
 
     const webhookPromises: Promise<{ name: string; success: boolean; status?: number; error?: string }>[] = [];
