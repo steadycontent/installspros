@@ -89,6 +89,13 @@ const ISP_OPTIONS = [
   { value: "other", label: "Other" },
 ];
 
+const STEP2_OPTIONS: { value: string; label: string; tagline: string }[] = [
+  { value: "rv-parks", label: "RV Park, Motorcoach, Campground", tagline: "Property-wide WiFi that fills sites and lifts reviews." },
+  { value: "marinas", label: "Marinas", tagline: "Dock-to-dock WiFi that holds up in salt air." },
+  { value: "mobile-home-parks", label: "Winery / Equestrian", tagline: "Property-wide internet as a community amenity." },
+  { value: "large-properties", label: "Other Large Property", tagline: "Warehouse, Construction, etc" },
+];
+
 const STEPS: Step[] = [
   { key: "propertyName", title: "What's the property or business name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
@@ -268,28 +275,34 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         <p className="text-white/70 text-sm md:text-base">{current.subtitle}</p>
 
         {current.type === "select" ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
-            {INDUSTRIES.map((ind) => (
-              <button
-                key={ind.slug}
-                type="button"
-                onClick={() => {
-                  setData({ ...data, industry: ind.slug });
-                  setErrors({});
-                }}
-                className={cn(
-                  "p-4 rounded-[4px] border-2 text-left transition-all",
-                  data.industry === ind.slug
-                    ? "border-primary bg-primary/20"
-                    : "border-white/15 bg-white/5 hover:border-white/30"
-                )}
-              >
-                <div className="font-semibold text-sm">{ind.shortLabel}</div>
-                <div className="text-[11px] text-white/60 mt-1 line-clamp-2">
-                  {ind.tagline}
-                </div>
-              </button>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+            {STEP2_OPTIONS.map((opt) => {
+              const selected =
+                data.industry === opt.value ||
+                (opt.value === "rv-parks" &&
+                  (data.industry === "campgrounds" || data.industry === "motorcoach-resorts"));
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => {
+                    setData({ ...data, industry: opt.value });
+                    setErrors({});
+                  }}
+                  className={cn(
+                    "p-4 rounded-[4px] border-2 text-left transition-all",
+                    selected
+                      ? "border-primary bg-primary/20"
+                      : "border-white/15 bg-white/5 hover:border-white/30"
+                  )}
+                >
+                  <div className="font-semibold text-sm">{opt.label}</div>
+                  <div className="text-[11px] text-white/60 mt-1">
+                    {opt.tagline}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         ) : current.type === "choice" ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
