@@ -1,21 +1,27 @@
-Update the assessment form Step 2 (industry selection) to match the provided screenshot.
+Align the `/assessment` Zapier webhook payload with the Job Install project reference (screenshots).
 
-**Changes:**
-1. Add a `STEP2_OPTIONS` constant in `src/components/commercial/InlineAssessmentForm.tsx` with four custom options:
-   - "RV Park, Motorcoach, Campground" (maps to slug `rv-parks`)
-   - "Marinas" (maps to slug `marinas`)
-   - "Winery / Equestrian" (maps to slug `mobile-home-parks`)
-   - "Other Large Property" (maps to slug `large-properties`)
-   Each option has a custom tagline matching the screenshot.
+## Differences vs current payload
 
-2. Replace the `INDUSTRIES.map()` rendering in the `select` step with `STEP2_OPTIONS.map()`.
+Current payload sends:
+- `installation_type` = "Commercial-RVPark" (mapped value)
+- No `lead_type` field
+- No `commercial_type` field
 
-3. Change the grid layout from `grid-cols-2 md:grid-cols-3` to `grid-cols-2` so all breakpoints show a 2×2 grid.
+Reference payload (target):
+- `installation_type` = "commercial"
+- `lead_type` = "commercial"
+- `commercial_type` = "Commercial-RVPark" (separate field)
 
-4. Handle selection state so the combined "RV Park, Motorcoach, Campground" option also appears selected if the underlying value is `campgrounds` or `motorcoach-resorts`.
+## Changes
 
-**Verification:**
-- Open `/assessment` and advance to Step 2.
-- Confirm four cards appear in a 2×2 grid with the exact labels and taglines from the screenshot.
-- Confirm selection highlight (primary border + bg-primary/20) works on click.
-- Confirm Continue and Back navigation still function.
+**1. `src/components/commercial/InlineAssessmentForm.tsx`**
+- Set `installationType: "commercial"` (constant for all commercial leads).
+- Add `commercial_type` to `property_meta` using the existing `commercialTypeMap` (rv-parks → Commercial-RVPark, marinas → Commercial-Marina, mobile-home-parks → Commercial-WineryEquestrian, large-properties → Commercial-Other).
+
+**2. `supabase/functions/forward-lead-webhook/index.ts`**
+- Extend `assessmentFields` with `commercial_type: String(pm.commercial_type ?? "")`.
+- Add `lead_type: leadData.lead_type` to both `zapierPayload.data` and `leadConnectorPayload` so the Zap receives it as a flat field.
+
+## Verification
+- Submit assessment form → check the Zap "Catch Hook" run details show `Installation Type: commercial`, `Lead Type: commercial`, `Commercial Type: Commercial-RVPark` (or matching mapped value), plus existing Property Name / Industry / Sites / Acreage / Current Isp fields.
+- DB `leads.installation_type` will now store "commercial" instead of the mapped Commercial-* string; that's consistent with the reference project.

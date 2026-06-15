@@ -174,7 +174,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         "mobile-home-parks": "Commercial-WineryEquestrian",
         "large-properties": "Commercial-Other",
       };
-      const installationType = commercialTypeMap[data.industry] || "Commercial-Other";
+      const commercialType = commercialTypeMap[data.industry] || "Commercial-Other";
 
       const payload = {
         name: data.propertyName,
@@ -184,15 +184,17 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         city: "",
         state: "",
         zip: "",
-        installationType,
+        installationType: "commercial",
         lead_type: "commercial",
         property_meta: {
           property_name: data.propertyName,
           industry: data.industry,
+          commercial_type: commercialType,
           sites: data.sites,
           acreage: data.acreage,
           current_isp: data.currentIsp,
         },
+
         utm_source: utm.utm_source || "",
         utm_medium: utm.utm_medium || "",
         utm_campaign: utm.utm_campaign || "",
