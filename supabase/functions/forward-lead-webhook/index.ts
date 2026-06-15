@@ -184,6 +184,8 @@ const handler = async (req: Request): Promise<Response> => {
       zip: leadData.zip || "",
       address: fullAddress,
       installation_type: leadData.installationType,
+      lead_type: leadData.lead_type || "residential",
+
       utm_source: leadData.utm_source || "",
       utm_medium: leadData.utm_medium || "",
       utm_campaign: leadData.utm_campaign || "",
