@@ -1,27 +1,36 @@
-Align the `/assessment` Zapier webhook payload with the Job Install project reference (screenshots).
+# Add `source_domain` to Webhook Payloads
 
-## Differences vs current payload
+Mirror the JOB INSTALL project exactly so Zapier mapping is identical.
 
-Current payload sends:
-- `installation_type` = "Commercial-RVPark" (mapped value)
-- No `lead_type` field
-- No `commercial_type` field
-
-Reference payload (target):
-- `installation_type` = "commercial"
-- `lead_type` = "commercial"
-- `commercial_type` = "Commercial-RVPark" (separate field)
+## Field
+- Name: `source_domain`
+- Value: `window.location.hostname` (bare domain, no protocol/path)
+- Sanitized server-side: lowercased, max 253 chars
 
 ## Changes
 
-**1. `src/components/commercial/InlineAssessmentForm.tsx`**
-- Set `installationType: "commercial"` (constant for all commercial leads).
-- Add `commercial_type` to `property_meta` using the existing `commercialTypeMap` (rv-parks → Commercial-RVPark, marinas → Commercial-Marina, mobile-home-parks → Commercial-WineryEquestrian, large-properties → Commercial-Other).
+### 1. `src/components/InlineQuoteForm.tsx` (residential funnel — full + partial submission paths)
+Add to both the full submit payload and the partial-lead payload sent to `forward-lead-webhook`:
+```ts
+source_domain: window.location.hostname,
+```
 
-**2. `supabase/functions/forward-lead-webhook/index.ts`**
-- Extend `assessmentFields` with `commercial_type: String(pm.commercial_type ?? "")`.
-- Add `lead_type: leadData.lead_type` to both `zapierPayload.data` and `leadConnectorPayload` so the Zap receives it as a flat field.
+### 2. `src/components/commercial/InlineAssessmentForm.tsx`
+Add to the assessment submit payload:
+```ts
+source_domain: window.location.hostname,
+```
 
-## Verification
-- Submit assessment form → check the Zap "Catch Hook" run details show `Installation Type: commercial`, `Lead Type: commercial`, `Commercial Type: Commercial-RVPark` (or matching mapped value), plus existing Property Name / Industry / Sites / Acreage / Current Isp fields.
-- DB `leads.installation_type` will now store "commercial" instead of the mapped Commercial-* string; that's consistent with the reference project.
+### 3. `supabase/functions/forward-lead-webhook/index.ts`
+- Accept optional `source_domain` on the incoming body, sanitized (lowercase, max 253 chars).
+- Forward as a flat field `source_domain` on:
+  - `zapierPayload.data`
+  - `leadConnectorPayload`
+  - LeadConnector partial-lead payload (if separate branch)
+
+## Zapier
+After one test submission per form, re-sample the trigger in Zapier so `Data Source Domain` appears in the field picker.
+
+## Out of scope
+- No DB column added.
+- No changes to lighting, contact, or photo webhooks.
