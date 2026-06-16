@@ -402,7 +402,8 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
         variant_id: sessionStorage.getItem("installpros_variant") || "",
         session_id: sessionStorage.getItem("installpros_analytics_session") || "",
         device_type: detectDeviceType(),
-        landing_host: window.location.hostname
+        landing_host: window.location.hostname,
+        source_domain: window.location.hostname
       };
 
       // Use fetch with keepalive (survives page unload, supports auth headers)
@@ -672,7 +673,8 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
             variant_id: sessionStorage.getItem("installpros_variant") || "",
             session_id: sessionStorage.getItem("installpros_analytics_session") || "",
             device_type: detectDeviceType(),
-            landing_host: window.location.hostname
+            landing_host: window.location.hostname,
+            source_domain: window.location.hostname
           }
         }).then(({ error }) => {
           if (error) {

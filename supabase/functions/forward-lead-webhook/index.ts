@@ -28,6 +28,7 @@ interface LeadData {
   session_id?: string;
   device_type?: string;
   landing_host?: string;
+  source_domain?: string;
   lead_type?: string;
   property_meta?: Record<string, unknown>;
 }
@@ -70,6 +71,7 @@ const handler = async (req: Request): Promise<Response> => {
       session_id: sanitize(raw.session_id, 100),
       device_type: deviceType,
       landing_host: sanitize(raw.landing_host, 253).toLowerCase(),
+      source_domain: sanitize(raw.source_domain, 253).toLowerCase(),
       lead_type: ["residential", "commercial"].includes(raw.lead_type) ? raw.lead_type : "residential",
       property_meta: raw.property_meta && typeof raw.property_meta === "object" ? raw.property_meta : undefined,
     };
@@ -170,6 +172,7 @@ const handler = async (req: Request): Promise<Response> => {
         gclid: leadData.gclid || "",
         is_partial: leadData.is_partial || false,
         device_type: leadData.device_type || "",
+        source_domain: leadData.source_domain || "",
         ...assessmentFields,
       },
     };
@@ -195,6 +198,7 @@ const handler = async (req: Request): Promise<Response> => {
       gclid: leadData.gclid || "",
       is_partial: leadData.is_partial || false,
       device_type: leadData.device_type || "",
+      source_domain: leadData.source_domain || "",
       ...assessmentFields,
     };
 
@@ -265,6 +269,7 @@ const handler = async (req: Request): Promise<Response> => {
       fbclid: leadData.fbclid || "",
       is_partial: leadData.is_partial || false,
       device_type: leadData.device_type || "",
+      source_domain: leadData.source_domain || "",
       submitted_at: new Date().toISOString(),
       ...assessmentFields,
     };
