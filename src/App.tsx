@@ -21,6 +21,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+const Terms = lazy(() => import("./pages/Terms"));
 const OptOutPreferences = lazy(() => import("./pages/OptOutPreferences"));
 const Confirmed = lazy(() => import("./pages/Confirmed"));
 const ScheduleCall = lazy(() => import("./pages/ScheduleCall"));
@@ -100,6 +101,7 @@ const App = () => (
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route path="/terms" element={<Terms />} />
               <Route path="/opt-out-preferences" element={<OptOutPreferences />} />
               <Route path="/confirmed" element={<Confirmed />} />
               <Route path="/schedule-call" element={<ScheduleCall />} />

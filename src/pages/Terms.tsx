@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const TermsAndConditions = () => {
+const Terms = () => {
   return (
     <>
       <Helmet>
@@ -11,7 +11,7 @@ const TermsAndConditions = () => {
           name="description"
           content="Terms and Conditions for InstallPros residential and commercial installation services."
         />
-        <link rel="canonical" href="https://installspros.com/terms-and-conditions" />
+        <link rel="canonical" href="https://installspros.com/terms" />
       </Helmet>
 
       <div className="min-h-screen bg-white">
@@ -231,4 +231,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default Terms;
