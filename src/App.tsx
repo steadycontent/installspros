@@ -101,6 +101,7 @@ const App = () => (
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route path="/terms" element={<Terms />} />
               <Route path="/opt-out-preferences" element={<OptOutPreferences />} />
               <Route path="/confirmed" element={<Confirmed />} />
               <Route path="/schedule-call" element={<ScheduleCall />} />
