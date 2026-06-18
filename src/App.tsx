@@ -19,6 +19,7 @@ const ContactUs = lazy(() => import("./pages/ContactUs"));
 const Locations = lazy(() => import("./pages/Locations"));
 const Blog = lazy(() => import("./pages/Blog"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Privacy = lazy(() => import("./pages/Privacy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const OptOutPreferences = lazy(() => import("./pages/OptOutPreferences"));
 const Confirmed = lazy(() => import("./pages/Confirmed"));
