@@ -98,6 +98,7 @@ const App = () => (
               <Route path="/locations" element={<Locations />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="/opt-out-preferences" element={<OptOutPreferences />} />
               <Route path="/confirmed" element={<Confirmed />} />
