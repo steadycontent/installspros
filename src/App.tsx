@@ -21,6 +21,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+const Terms = lazy(() => import("./pages/Terms"));
 const OptOutPreferences = lazy(() => import("./pages/OptOutPreferences"));
 const Confirmed = lazy(() => import("./pages/Confirmed"));
 const ScheduleCall = lazy(() => import("./pages/ScheduleCall"));
