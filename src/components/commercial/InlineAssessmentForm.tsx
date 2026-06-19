@@ -65,7 +65,7 @@ const INDUSTRY_OPTIONS: { value: string; label: string; tagline: string }[] = [
 
 const ALL_STEPS: Step[] = [
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
-  { key: "propertyDetails", title: "Tell us a little bit about your property.", subtitle: "Size, number of sites, current internet — anything helpful.", type: "textarea", placeholder: "e.g. 120-site RV park on 35 acres, current internet is slow DSL...", icon: FileText },
+  { key: "propertyDetails", title: "What's your property like?", subtitle: "Tell us whatever you know — no pressure.", type: "textarea", placeholder: "e.g. 120-site RV park on 35 acres, current internet is slow DSL...", icon: FileText },
   { key: "name", title: "What's your name?", subtitle: "So we know who we're talking to.", type: "text", placeholder: "Your full name", icon: User },
   { key: "phone", title: "How can we reach you?", subtitle: "We'll call to schedule your assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
 ];
