@@ -124,7 +124,7 @@ const Commercial = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
                   <div className="relative h-full flex items-center gap-4 p-5">
                     <div className="flex-1 min-w-0">
-                      <div className="font-bold text-lg text-white leading-tight drop-shadow">
+                      <div className="font-bold text-xl text-white leading-tight drop-shadow">
                         {pt.label}
                       </div>
                       <div className="text-white/85 text-sm mt-0.5 drop-shadow">
