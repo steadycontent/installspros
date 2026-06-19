@@ -204,7 +204,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
     <div
       id="quote-funnel-container"
       className={cn(
-        "rounded-[4px] border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden",
+        "rounded-[4px] border border-white/5 overflow-hidden",
         className
       )}
     >
