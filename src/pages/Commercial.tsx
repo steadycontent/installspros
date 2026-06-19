@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import { Phone } from "lucide-react";
-import installProsLogo from "@/assets/installpros-logo-white.png.asset.json";
 import rvParkImg from "@/assets/property-rv-park.jpg";
 import marinaImg from "@/assets/property-marina.jpg";
 import wineryImg from "@/assets/property-winery.jpg";
@@ -12,6 +10,7 @@ import CalculatorPreview from "@/components/commercial/CalculatorPreview";
 import ProcessTimeline from "@/components/commercial/ProcessTimeline";
 import InfrastructureGrid from "@/components/commercial/InfrastructureGrid";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const PROPERTY_TYPES = [
   {
