@@ -19,7 +19,7 @@ const PROPERTY_TYPES = [
     image: rvParkImg,
     label: "RV Park / Campground",
     tagline: "Fill sites & lift reviews",
-    shadow: "shadow-blue-500/30",
+    shadow: "shadow-blue-500/15",
   },
   {
     value: "marinas",
