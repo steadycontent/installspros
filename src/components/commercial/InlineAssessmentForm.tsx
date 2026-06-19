@@ -246,8 +246,8 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
                   className={cn(
                     "p-4 rounded-[4px] border-2 text-left transition-all",
                     selected
-                      ? "border-primary bg-primary/20"
-                      : "border-white/15 bg-white/5 hover:border-white/30"
+                      ? "border-primary/60 bg-primary/10"
+                      : "border-white/10 bg-transparent hover:border-white/25"
                   )}
                 >
                   <div className="font-semibold text-sm">{opt.label}</div>
