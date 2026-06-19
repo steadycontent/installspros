@@ -334,7 +334,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
             ) : step === STEPS.length - 1 ? (
               <>
                 <Check className="w-4 h-4 mr-2" />
-                Request Assessment
+                Get My Quote
               </>
             ) : (
               <>
