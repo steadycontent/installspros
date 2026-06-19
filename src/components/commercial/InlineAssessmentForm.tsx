@@ -1,71 +1,48 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import {
-  Building2, Tag, Hash, Trees, Wifi, Phone, Mail,
+  Tag, FileText, User, Phone,
   ArrowRight, ArrowLeft, Check, Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
-import { INDUSTRIES } from "@/lib/industries";
 import { trackFunnelStep } from "@/lib/analytics/tracker";
 
 interface AssessmentData {
-  propertyName: string;
   industry: string;
-  sites: string;
-  acreage: string;
-  currentIsp: string;
+  propertyDetails: string;
+  name: string;
   phone: string;
-  email: string;
 }
 
 const initial: AssessmentData = {
-  propertyName: "",
   industry: "",
-  sites: "",
-  acreage: "",
-  currentIsp: "",
+  propertyDetails: "",
+  name: "",
   phone: "",
-  email: "",
 };
 
 const schemas = {
-  propertyName: z.string().trim().optional(),
-  industry: z.string().min(1, "Select an industry"),
-  sites: z
+  industry: z.string().min(1, "Select a property type"),
+  propertyDetails: z
     .string()
     .trim()
-    .optional()
-    .refine(
-      (v) => {
-        if (!v) return true;
-        const n = Number(v);
-        return /^\d+$/.test(v) && n >= 0 && n <= 999;
-      },
-      "Numbers only, max 999"
-    ),
-  acreage: z
+    .min(3, "Tell us a bit about your property")
+    .max(1000, "Keep it under 1000 characters"),
+  name: z
     .string()
     .trim()
-    .optional()
-    .refine(
-      (v) => {
-        if (!v) return true;
-        const n = Number(v);
-        return /^\d+$/.test(v) && n >= 0 && n <= 999;
-      },
-      "Numbers only, max 999"
-    ),
-  currentIsp: z.string().trim().optional(),
+    .min(2, "Enter your name")
+    .max(100, "Keep it under 100 characters"),
   phone: z
     .string()
     .trim()
     .refine((v) => v.replace(/\D/g, "").length >= 10, "Enter a valid 10-digit phone"),
-  email: z.string().trim().email("Enter a valid email"),
 } as const;
 
 type StepKey = keyof AssessmentData;
@@ -74,35 +51,23 @@ interface Step {
   key: StepKey;
   title: string;
   subtitle: string;
-  type: "text" | "tel" | "email" | "select" | "choice";
+  type: "text" | "tel" | "select" | "textarea";
   placeholder?: string;
-  icon: typeof Building2;
-  options?: { value: string; label: string }[];
+  icon: typeof Tag;
 }
 
-const ISP_OPTIONS = [
-  { value: "cable", label: "Cable" },
-  { value: "fiber", label: "Fiber" },
-  { value: "satellite", label: "Satellite" },
-  { value: "other", label: "Other" },
-];
-
-const STEP2_OPTIONS: { value: string; label: string; tagline: string }[] = [
+const INDUSTRY_OPTIONS: { value: string; label: string; tagline: string }[] = [
   { value: "rv-parks", label: "RV Park, Motorcoach, Campground", tagline: "Property-wide WiFi that fills sites and lifts reviews." },
   { value: "marinas", label: "Marinas", tagline: "Dock-to-dock WiFi that holds up in salt air." },
   { value: "mobile-home-parks", label: "Winery / Equestrian", tagline: "Property-wide internet as a community amenity." },
   { value: "large-properties", label: "Other Large Property", tagline: "Warehouse, Construction, etc" },
 ];
 
-// Full step list (propertyName is step 0, industry is step 1)
 const ALL_STEPS: Step[] = [
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
-  { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine. (Optional)", type: "text", placeholder: "120", icon: Hash },
-  { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine. (Optional)", type: "text", placeholder: "35", icon: Trees },
-  { key: "currentIsp", title: "What's your current internet situation?", subtitle: "Pick the closest match.", type: "choice", icon: Wifi, options: ISP_OPTIONS },
-  { key: "phone", title: "Best phone for a callback?", subtitle: "We'll schedule the assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
-  { key: "email", title: "Where should we send your plan?", subtitle: "We'll email the assessment summary.", type: "email", placeholder: "you@property.com", icon: Mail },
-  { key: "propertyName", title: "Property or business name? (Optional)", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
+  { key: "propertyDetails", title: "Tell us a little bit about your property.", subtitle: "Size, number of sites, current internet — anything helpful.", type: "textarea", placeholder: "e.g. 120-site RV park on 35 acres, current internet is slow DSL...", icon: FileText },
+  { key: "name", title: "What's your name?", subtitle: "So we know who we're talking to.", type: "text", placeholder: "Your full name", icon: User },
+  { key: "phone", title: "How can we reach you?", subtitle: "We'll call to schedule your assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
 ];
 
 interface Props {
@@ -111,10 +76,10 @@ interface Props {
   skipPropertyName?: boolean;
 }
 
-const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = false }: Props) => {
+const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
   const navigate = useNavigate();
 
-  // If industry is pre-selected (came from /commercial), start at step 1 (sites)
+  // If industry is pre-selected (came from /commercial), start at step 1
   const initialStep = defaultIndustry ? 1 : 0;
 
   const [step, setStep] = useState(initialStep);
@@ -125,22 +90,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
-  // Build the active steps list — optionally exclude propertyName
-  const STEPS = skipPropertyName
-    ? ALL_STEPS.filter((s) => s.key !== "propertyName")
-    : ALL_STEPS;
-
-  // Prefill sites from calculator session
-  useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem("assessmentCalculator");
-      if (raw) {
-        const c = JSON.parse(raw);
-        setData((d) => ({ ...d, sites: String(c.sites ?? "") }));
-      }
-    } catch {/* noop */}
-  }, []);
-
+  const STEPS = ALL_STEPS;
   const current = STEPS[step];
   const progress = ((step + 1) / STEPS.length) * 100;
 
@@ -167,7 +117,6 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
 
   const back = () => {
     if (step > 0) setStep((s) => s - 1);
-    // If industry was pre-selected and we're at step 1, go back to /commercial
     else if (defaultIndustry && step === 0) {
       navigate("/commercial");
     }
@@ -189,8 +138,8 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
       const commercialType = commercialTypeMap[data.industry] || "Commercial-Other";
 
       const payload = {
-        name: data.propertyName || data.email,
-        email: data.email,
+        name: data.name,
+        email: "",
         phone: data.phone,
         street: "",
         city: "",
@@ -199,12 +148,10 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
         installationType: "commercial",
         lead_type: "commercial",
         property_meta: {
-          property_name: data.propertyName,
+          property_name: data.name,
           industry: data.industry,
           commercial_type: commercialType,
-          sites: data.sites,
-          acreage: data.acreage,
-          current_isp: data.currentIsp,
+          property_details: data.propertyDetails,
         },
         utm_source: utm.utm_source || "",
         utm_medium: utm.utm_medium || "",
@@ -222,23 +169,9 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
       };
 
       sessionStorage.setItem("assessmentData", JSON.stringify(data));
-      sessionStorage.setItem("leadEmail", data.email);
 
       if (supabase) {
-        await Promise.allSettled([
-          supabase.functions.invoke("forward-lead-webhook", { body: payload }),
-          supabase.functions.invoke("send-assessment-email", {
-            body: {
-              email: data.email,
-              propertyName: data.propertyName,
-              industry: data.industry,
-              sites: data.sites,
-              acreage: data.acreage,
-              currentIsp: data.currentIsp,
-              phone: data.phone,
-            },
-          }),
-        ]);
+        await supabase.functions.invoke("forward-lead-webhook", { body: payload });
       }
 
       toast({
@@ -259,7 +192,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
   };
 
   const onKey = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && current.type !== "select") {
+    if (e.key === "Enter" && current.type !== "select" && current.type !== "textarea") {
       e.preventDefault();
       next();
     }
@@ -297,7 +230,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
 
         {current.type === "select" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-            {STEP2_OPTIONS.map((opt) => {
+            {INDUSTRY_OPTIONS.map((opt) => {
               const selected =
                 data.industry === opt.value ||
                 (opt.value === "rv-parks" &&
@@ -325,45 +258,33 @@ const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = f
               );
             })}
           </div>
-        ) : current.type === "choice" ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-            {current.options?.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
-                onClick={() => {
-                  setData({ ...data, [current.key]: opt.value });
-                  setErrors({});
-                }}
-                className={cn(
-                  "p-4 rounded-[4px] border-2 text-center font-semibold text-sm transition-all",
-                  data[current.key] === opt.value
-                    ? "border-primary bg-primary/20"
-                    : "border-white/15 bg-white/5 hover:border-white/30"
-                )}
-              >
-                {opt.label}
-              </button>
-            ))}
+        ) : current.type === "textarea" ? (
+          <div className="mt-6">
+            <Textarea
+              placeholder={current.placeholder}
+              value={data[current.key]}
+              onChange={(e) => {
+                setData({ ...data, [current.key]: e.target.value.slice(0, 1000) });
+                setErrors({});
+              }}
+              data-hj-allow
+              autoFocus
+              rows={5}
+              className="text-base bg-white/5 border-white/20 rounded-[4px] text-white placeholder:text-white/40 focus-visible:ring-primary"
+            />
           </div>
         ) : (
           <div className="relative mt-6 group">
             <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
             <Input
               type={current.type === "tel" ? "tel" : current.type}
-              inputMode={
-                current.key === "sites" || current.key === "acreage" || current.type === "tel"
-                  ? "numeric"
-                  : undefined
-              }
-              maxLength={current.type === "tel" ? 14 : current.key === "sites" || current.key === "acreage" ? 3 : undefined}
+              inputMode={current.type === "tel" ? "numeric" : undefined}
+              maxLength={current.type === "tel" ? 14 : 100}
               placeholder={current.placeholder}
               value={data[current.key]}
               onChange={(e) => {
                 let v = e.target.value;
-                if (current.key === "sites" || current.key === "acreage") {
-                  v = v.replace(/\D/g, "").slice(0, 3);
-                } else if (current.type === "tel") {
+                if (current.type === "tel") {
                   const d = v.replace(/\D/g, "").slice(0, 10);
                   if (d.length > 6) v = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
                   else if (d.length > 3) v = `(${d.slice(0,3)}) ${d.slice(3)}`;
