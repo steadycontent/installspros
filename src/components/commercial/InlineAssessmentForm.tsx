@@ -204,7 +204,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
     <div
       id="quote-funnel-container"
       className={cn(
-        "rounded-[4px] border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden",
+        "rounded-[4px] border border-white/5 overflow-hidden",
         className
       )}
     >
@@ -246,8 +246,8 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
                   className={cn(
                     "p-4 rounded-[4px] border-2 text-left transition-all",
                     selected
-                      ? "border-primary bg-primary/20"
-                      : "border-white/15 bg-white/5 hover:border-white/30"
+                      ? "border-primary/60 bg-primary/10"
+                      : "border-white/10 bg-transparent hover:border-white/25"
                   )}
                 >
                   <div className="font-semibold text-sm">{opt.label}</div>
@@ -270,12 +270,12 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
               data-hj-allow
               autoFocus
               rows={5}
-              className="text-base bg-white/5 border-white/20 rounded-[4px] text-white placeholder:text-white/40 focus-visible:ring-primary"
+              className="text-base bg-white/[0.03] border-white/15 rounded-[4px] text-white placeholder:text-white/40 focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0"
             />
           </div>
         ) : (
           <div className="relative mt-6 group">
-            <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
+            <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-primary/70 transition-colors" />
             <Input
               type={current.type === "tel" ? "tel" : current.type}
               inputMode={current.type === "tel" ? "numeric" : undefined}
@@ -297,7 +297,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
               onKeyDown={onKey}
               data-hj-allow
               autoFocus
-              className="pl-9 h-14 text-xl md:text-2xl font-medium bg-transparent border-0 border-b-2 border-white/30 rounded-none text-white placeholder:text-white/40 focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="pl-9 h-14 text-xl md:text-2xl font-medium bg-transparent border-0 border-b border-white/20 rounded-none text-white placeholder:text-white/40 focus:border-primary/70 focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
         )}
