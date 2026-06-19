@@ -19,28 +19,28 @@ const PROPERTY_TYPES = [
     image: rvParkImg,
     label: "RV Park / Campground",
     tagline: "Fill sites & lift reviews",
-    shadow: "shadow-blue-500/30",
+    shadow: "shadow-blue-500/15",
   },
   {
     value: "marinas",
     image: marinaImg,
     label: "Marina / Boatyard",
     tagline: "Dock-to-dock WiFi",
-    shadow: "shadow-cyan-500/30",
+    shadow: "shadow-cyan-500/15",
   },
   {
     value: "mobile-home-parks",
     image: wineryImg,
     label: "Winery / Equestrian",
     tagline: "Property-wide amenity WiFi",
-    shadow: "shadow-purple-500/30",
+    shadow: "shadow-purple-500/15",
   },
   {
     value: "large-properties",
     image: largePropertyImg,
     label: "Other Large Property",
     tagline: "Warehouse, construction & more",
-    shadow: "shadow-orange-500/30",
+    shadow: "shadow-orange-500/15",
   },
 ];
 
@@ -124,10 +124,10 @@ const Commercial = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
                   <div className="relative h-full flex items-center gap-4 p-5">
                     <div className="flex-1 min-w-0">
-                      <div className="font-bold text-lg text-white leading-tight drop-shadow">
+                      <div className="font-bold text-xl text-white leading-tight drop-shadow">
                         {pt.label}
                       </div>
-                      <div className="text-white/85 text-sm mt-0.5 drop-shadow">
+                      <div className="text-white/85 text-base mt-0.5 drop-shadow">
                         {pt.tagline}
                       </div>
                     </div>
