@@ -40,7 +40,7 @@ const PROPERTY_TYPES = [
     image: largePropertyImg,
     label: "Other Large Property",
     tagline: "Warehouse, construction & more",
-    shadow: "shadow-orange-500/30",
+    shadow: "shadow-orange-500/15",
   },
 ];
 
