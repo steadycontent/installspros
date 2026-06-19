@@ -5,10 +5,12 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { fireGoogleAdsConversion } from "@/lib/googleAds";
+import { fireMetaLeadEvent } from "@/lib/metaPixel";
 
 const ThankYouAssessment = () => {
   useEffect(() => {
     try { fireGoogleAdsConversion(); } catch { /* noop */ }
+    try { fireMetaLeadEvent(); } catch { /* noop */ }
   }, []);
 
   return (

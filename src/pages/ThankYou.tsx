@@ -6,6 +6,7 @@ import StepIndicator from "@/components/StepIndicator";
 import { Camera, Upload, MessageSquare, Send, Loader2, X, Clock } from "lucide-react";
 import { trackLead } from "@/lib/analytics/tracker";
 import { fireGoogleAdsConversion } from "@/lib/googleAds";
+import { fireMetaLeadEvent } from "@/lib/metaPixel";
 import { setBingUetUserData } from "@/lib/bingUet";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -47,6 +48,8 @@ const ThankYou = () => {
     }
     // Fallback Google Ads conversion fire (deduped per-session via sessionStorage).
     fireGoogleAdsConversion();
+    // Meta Pixel Lead event (deduped per-session).
+    try { fireMetaLeadEvent(); } catch { /* noop */ }
   }, []);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { fireMetaLeadEvent } from "@/lib/metaPixel";
 
 const Confirmed = () => {
+  useEffect(() => {
+    try { fireMetaLeadEvent(); } catch { /* noop */ }
+  }, []);
+
   return (
     <>
       <Helmet>
