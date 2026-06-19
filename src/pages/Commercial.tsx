@@ -62,19 +62,7 @@ const Commercial = () => {
         <link rel="canonical" href="https://installspros.com/commercial" />
       </Helmet>
 
-      {/* Minimal sticky header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(222,47%,6%)] border-b border-white/10 px-4 py-3 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
-          <img src={installProsLogo.url} alt="InstallPros" className="h-8 w-auto" />
-        </a>
-        <a
-          href="tel:+15126756605"
-          className="inline-flex items-center gap-2 rounded-full bg-[#0D9488] text-white text-[15px] font-semibold h-10 px-5 hover:bg-[#0B7C72] transition-colors"
-        >
-          <Phone className="w-4 h-4 flex-shrink-0" />
-          Call Us
-        </a>
-      </header>
+      <Navbar />
 
       <main className="min-h-screen bg-[hsl(222,47%,6%)] text-white">
         {/* Hero: Property Type Selector — full viewport, centered */}
