@@ -65,7 +65,7 @@ const INDUSTRY_OPTIONS: { value: string; label: string; tagline: string }[] = [
 
 const ALL_STEPS: Step[] = [
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
-  { key: "propertyDetails", title: "Tell us a little bit about your property.", subtitle: "Size, number of sites, current internet — anything helpful.", type: "textarea", placeholder: "e.g. 120-site RV park on 35 acres, current internet is slow DSL...", icon: FileText },
+  { key: "propertyDetails", title: "What's your property like?", subtitle: "Tell us whatever you know — no pressure.", type: "textarea", placeholder: "e.g. 120-site RV park on 35 acres, current internet is slow DSL...", icon: FileText },
   { key: "name", title: "What's your name?", subtitle: "So we know who we're talking to.", type: "text", placeholder: "Your full name", icon: User },
   { key: "phone", title: "How can we reach you?", subtitle: "We'll call to schedule your assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
 ];
@@ -208,20 +208,20 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         className
       )}
     >
-      <div className="h-1 bg-white/10">
+      <div className="h-0.5 bg-white/5">
         <div
-          className="h-full bg-primary transition-all duration-500"
+          className="h-full bg-primary/60 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       <div className="p-6 md:p-8 text-white">
-        <div className="flex items-center justify-between text-xs text-white/60 mb-3">
+        <div className="flex items-center justify-between text-xs text-white/40 mb-3">
           <span>
             Step {step + 1} of {STEPS.length}
           </span>
-          <span className="uppercase tracking-[0.18em] text-primary">
-            Free Property Assessment
+          <span className="tracking-wide">
+            Free assessment
           </span>
         </div>
 
