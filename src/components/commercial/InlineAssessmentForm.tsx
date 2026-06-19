@@ -275,7 +275,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
           </div>
         ) : (
           <div className="relative mt-6 group">
-            <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-primary transition-colors" />
+            <Icon className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-primary/70 transition-colors" />
             <Input
               type={current.type === "tel" ? "tel" : current.type}
               inputMode={current.type === "tel" ? "numeric" : undefined}
@@ -297,7 +297,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
               onKeyDown={onKey}
               data-hj-allow
               autoFocus
-              className="pl-9 h-14 text-xl md:text-2xl font-medium bg-transparent border-0 border-b-2 border-white/30 rounded-none text-white placeholder:text-white/40 focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="pl-9 h-14 text-xl md:text-2xl font-medium bg-transparent border-0 border-b border-white/20 rounded-none text-white placeholder:text-white/40 focus:border-primary/70 focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
         )}
