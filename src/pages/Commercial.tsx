@@ -127,7 +127,7 @@ const Commercial = () => {
                       <div className="font-bold text-xl text-white leading-tight drop-shadow">
                         {pt.label}
                       </div>
-                      <div className="text-white/85 text-sm mt-0.5 drop-shadow">
+                      <div className="text-white/85 text-base mt-0.5 drop-shadow">
                         {pt.tagline}
                       </div>
                     </div>
