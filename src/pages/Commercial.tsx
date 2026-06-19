@@ -26,7 +26,7 @@ const PROPERTY_TYPES = [
     image: marinaImg,
     label: "Marina / Boatyard",
     tagline: "Dock-to-dock WiFi",
-    shadow: "shadow-cyan-500/30",
+    shadow: "shadow-cyan-500/15",
   },
   {
     value: "mobile-home-parks",
