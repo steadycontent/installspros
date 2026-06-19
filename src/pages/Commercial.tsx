@@ -33,7 +33,7 @@ const PROPERTY_TYPES = [
     image: wineryImg,
     label: "Winery / Equestrian",
     tagline: "Property-wide amenity WiFi",
-    shadow: "shadow-purple-500/30",
+    shadow: "shadow-purple-500/15",
   },
   {
     value: "large-properties",
