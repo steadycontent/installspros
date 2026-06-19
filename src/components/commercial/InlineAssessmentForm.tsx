@@ -208,20 +208,20 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         className
       )}
     >
-      <div className="h-1 bg-white/10">
+      <div className="h-0.5 bg-white/5">
         <div
-          className="h-full bg-primary transition-all duration-500"
+          className="h-full bg-primary/60 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       <div className="p-6 md:p-8 text-white">
-        <div className="flex items-center justify-between text-xs text-white/60 mb-3">
+        <div className="flex items-center justify-between text-xs text-white/40 mb-3">
           <span>
             Step {step + 1} of {STEPS.length}
           </span>
-          <span className="uppercase tracking-[0.18em] text-primary">
-            Free Property Assessment
+          <span className="tracking-wide">
+            Free assessment
           </span>
         </div>
 
