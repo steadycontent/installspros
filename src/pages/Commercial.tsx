@@ -4,6 +4,7 @@ import rvParkImg from "@/assets/property-rv-park.jpg";
 import marinaImg from "@/assets/property-marina.jpg";
 import wineryImg from "@/assets/property-winery.jpg";
 import largePropertyImg from "@/assets/property-large.jpg";
+import { fireMetaPixelEvent } from "@/lib/metaPixel";
 import MetricsBand from "@/components/commercial/MetricsBand";
 import IndustriesGrid from "@/components/commercial/IndustriesGrid";
 import CalculatorPreview from "@/components/commercial/CalculatorPreview";
@@ -48,6 +49,8 @@ const Commercial = () => {
   const navigate = useNavigate();
 
   const handleSelect = (industryValue: string) => {
+    // Micro-conversion: gives Meta signal before the full Lead event fires
+    try { fireMetaPixelEvent("InitiateCheckout", { content_category: industryValue }); } catch { /* noop */ }
     navigate(`/assessment?industry=${industryValue}&skip=propertyName`);
   };
 
