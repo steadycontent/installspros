@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { INDUSTRIES } from "@/lib/industries";
 import { trackFunnelStep } from "@/lib/analytics/tracker";
-// trackFunnelStep takes a step number
 
 interface AssessmentData {
   propertyName: string;
@@ -35,7 +34,7 @@ const initial: AssessmentData = {
 };
 
 const schemas = {
-  propertyName: z.string().trim().min(2, "Enter the property or business name"),
+  propertyName: z.string().trim().optional(),
   industry: z.string().min(1, "Select an industry"),
   sites: z
     .string()
@@ -69,7 +68,6 @@ const schemas = {
   email: z.string().trim().email("Enter a valid email"),
 } as const;
 
-
 type StepKey = keyof AssessmentData;
 
 interface Step {
@@ -96,30 +94,43 @@ const STEP2_OPTIONS: { value: string; label: string; tagline: string }[] = [
   { value: "large-properties", label: "Other Large Property", tagline: "Warehouse, Construction, etc" },
 ];
 
-const STEPS: Step[] = [
-  { key: "propertyName", title: "What's the property or business name?", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
+// Full step list (propertyName is step 0, industry is step 1)
+const ALL_STEPS: Step[] = [
   { key: "industry", title: "What kind of property is it?", subtitle: "Pick the closest match.", type: "select", icon: Tag },
   { key: "sites", title: "How many sites, slips, or lots?", subtitle: "Rough count is fine. (Optional)", type: "text", placeholder: "120", icon: Hash },
   { key: "acreage", title: "How many acres does it cover?", subtitle: "Approximate is fine. (Optional)", type: "text", placeholder: "35", icon: Trees },
   { key: "currentIsp", title: "What's your current internet situation?", subtitle: "Pick the closest match.", type: "choice", icon: Wifi, options: ISP_OPTIONS },
   { key: "phone", title: "Best phone for a callback?", subtitle: "We'll schedule the assessment.", type: "tel", placeholder: "(555) 123-4567", icon: Phone },
   { key: "email", title: "Where should we send your plan?", subtitle: "We'll email the assessment summary.", type: "email", placeholder: "you@property.com", icon: Mail },
+  { key: "propertyName", title: "Property or business name? (Optional)", subtitle: "So we know who we're designing for.", type: "text", placeholder: "Sunset Bay Resort", icon: Building2 },
 ];
-
 
 interface Props {
   className?: string;
   defaultIndustry?: string;
+  skipPropertyName?: boolean;
 }
 
-const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
+const InlineAssessmentForm = ({ className, defaultIndustry, skipPropertyName = false }: Props) => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
-  const [data, setData] = useState<AssessmentData>(initial);
+
+  // If industry is pre-selected (came from /commercial), start at step 1 (sites)
+  const initialStep = defaultIndustry ? 1 : 0;
+
+  const [step, setStep] = useState(initialStep);
+  const [data, setData] = useState<AssessmentData>({
+    ...initial,
+    industry: defaultIndustry || "",
+  });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
-  // Prefill from calculator or default industry
+  // Build the active steps list — optionally exclude propertyName
+  const STEPS = skipPropertyName
+    ? ALL_STEPS.filter((s) => s.key !== "propertyName")
+    : ALL_STEPS;
+
+  // Prefill sites from calculator session
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem("assessmentCalculator");
@@ -128,10 +139,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         setData((d) => ({ ...d, sites: String(c.sites ?? "") }));
       }
     } catch {/* noop */}
-    if (defaultIndustry) {
-      setData((d) => ({ ...d, industry: defaultIndustry }));
-    }
-  }, [defaultIndustry]);
+  }, []);
 
   const current = STEPS[step];
   const progress = ((step + 1) / STEPS.length) * 100;
@@ -159,6 +167,10 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
 
   const back = () => {
     if (step > 0) setStep((s) => s - 1);
+    // If industry was pre-selected and we're at step 1, go back to /commercial
+    else if (defaultIndustry && step === 0) {
+      navigate("/commercial");
+    }
   };
 
   const submit = async () => {
@@ -177,7 +189,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
       const commercialType = commercialTypeMap[data.industry] || "Commercial-Other";
 
       const payload = {
-        name: data.propertyName,
+        name: data.propertyName || data.email,
         email: data.email,
         phone: data.phone,
         street: "",
@@ -194,7 +206,6 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
           acreage: data.acreage,
           current_isp: data.currentIsp,
         },
-
         utm_source: utm.utm_source || "",
         utm_medium: utm.utm_medium || "",
         utm_campaign: utm.utm_campaign || "",
@@ -229,7 +240,6 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
           }),
         ]);
       }
-
 
       toast({
         title: "Assessment requested",
@@ -363,7 +373,6 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
                 setData({ ...data, [current.key]: v });
                 setErrors({});
               }}
-
               onKeyDown={onKey}
               data-hj-allow
               autoFocus
@@ -379,7 +388,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         )}
 
         <div className="flex items-center justify-between gap-3 mt-8">
-          {step > 0 ? (
+          {step > 0 || defaultIndustry ? (
             <Button
               variant="ghost"
               onClick={back}
