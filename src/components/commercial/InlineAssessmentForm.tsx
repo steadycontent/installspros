@@ -270,7 +270,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
               data-hj-allow
               autoFocus
               rows={5}
-              className="text-base bg-white/5 border-white/20 rounded-[4px] text-white placeholder:text-white/40 focus-visible:ring-primary"
+              className="text-base bg-white/[0.03] border-white/15 rounded-[4px] text-white placeholder:text-white/40 focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0"
             />
           </div>
         ) : (
