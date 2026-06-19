@@ -1,7 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { Phone } from "lucide-react";
-import installProsLogo from "@/assets/installpros-logo.svg";
+import installProsLogo from "@/assets/installpros-logo-white.png.asset.json";
+import rvParkImg from "@/assets/property-rv-park.jpg";
+import marinaImg from "@/assets/property-marina.jpg";
+import wineryImg from "@/assets/property-winery.jpg";
+import largePropertyImg from "@/assets/property-large.jpg";
 import MetricsBand from "@/components/commercial/MetricsBand";
 import IndustriesGrid from "@/components/commercial/IndustriesGrid";
 import CalculatorPreview from "@/components/commercial/CalculatorPreview";
@@ -12,41 +16,34 @@ import Footer from "@/components/Footer";
 const PROPERTY_TYPES = [
   {
     value: "rv-parks",
-    emoji: "🏕️",
+    image: rvParkImg,
     label: "RV Park / Campground",
     tagline: "Fill sites & lift reviews",
-    color: "from-blue-600 to-blue-500",
-    shadow: "shadow-blue-500/40",
-    border: "border-blue-400/30",
+    shadow: "shadow-blue-500/30",
   },
   {
     value: "marinas",
-    emoji: "⚓",
+    image: marinaImg,
     label: "Marina / Boatyard",
     tagline: "Dock-to-dock WiFi",
-    color: "from-cyan-600 to-cyan-500",
-    shadow: "shadow-cyan-500/40",
-    border: "border-cyan-400/30",
+    shadow: "shadow-cyan-500/30",
   },
   {
     value: "mobile-home-parks",
-    emoji: "🍷",
+    image: wineryImg,
     label: "Winery / Equestrian",
     tagline: "Property-wide amenity WiFi",
-    color: "from-purple-600 to-purple-500",
-    shadow: "shadow-purple-500/40",
-    border: "border-purple-400/30",
+    shadow: "shadow-purple-500/30",
   },
   {
     value: "large-properties",
-    emoji: "🏗️",
+    image: largePropertyImg,
     label: "Other Large Property",
     tagline: "Warehouse, construction & more",
-    color: "from-orange-600 to-orange-500",
-    shadow: "shadow-orange-500/40",
-    border: "border-orange-400/30",
+    shadow: "shadow-orange-500/30",
   },
 ];
+
 
 const Commercial = () => {
   const navigate = useNavigate();
@@ -69,7 +66,7 @@ const Commercial = () => {
       {/* Minimal sticky header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(222,47%,6%)] border-b border-white/10 px-4 py-3 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2">
-          <img src={installProsLogo} alt="InstallPros" className="h-8 w-auto" />
+          <img src={installProsLogo.url} alt="InstallPros" className="h-8 w-auto" />
         </a>
         <a
           href="tel:+15126756605"
@@ -99,18 +96,15 @@ const Commercial = () => {
             </div>
 
             {/* Big colorful property type buttons */}
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-4">
               {PROPERTY_TYPES.map((pt) => (
                 <button
                   key={pt.value}
                   onClick={() => handleSelect(pt.value)}
                   className={[
-                    "group relative w-full flex items-center gap-4",
-                    "rounded-2xl border",
-                    pt.border,
-                    "bg-gradient-to-r",
-                    pt.color,
-                    "p-5 text-left",
+                    "group relative w-full overflow-hidden",
+                    "rounded-2xl border border-white/10",
+                    "h-32 text-left",
                     "shadow-lg",
                     pt.shadow,
                     "hover:scale-[1.02] hover:shadow-xl",
@@ -119,27 +113,38 @@ const Commercial = () => {
                     "cursor-pointer",
                   ].join(" ")}
                 >
-                  <span className="text-4xl flex-shrink-0 drop-shadow">{pt.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-lg text-white leading-tight">
-                      {pt.label}
+                  <img
+                    src={pt.image}
+                    alt={pt.label}
+                    loading="lazy"
+                    width={800}
+                    height={512}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
+                  <div className="relative h-full flex items-center gap-4 p-5">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-lg text-white leading-tight drop-shadow">
+                        {pt.label}
+                      </div>
+                      <div className="text-white/85 text-sm mt-0.5 drop-shadow">
+                        {pt.tagline}
+                      </div>
                     </div>
-                    <div className="text-white/80 text-sm mt-0.5">
-                      {pt.tagline}
-                    </div>
+                    <svg
+                      className="w-5 h-5 text-white flex-shrink-0 group-hover:translate-x-1 transition-transform drop-shadow"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
-                  <svg
-                    className="w-5 h-5 text-white/70 flex-shrink-0 group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
                 </button>
               ))}
             </div>
+
 
             {/* Trust line */}
             <p className="text-center text-white/40 text-xs mt-6">
