@@ -337,6 +337,78 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Fix9 integration is currently PAUSED");
 
+    // ── Meta Conversions API (CAPI) ────────────────────────────────
+    // Server-side Lead event — fires even when browser pixel is blocked (iOS 14+)
+    const capiToken = Deno.env.get("META_CAPI_TOKEN");
+    const PIXEL_ID = "898862795583500";
+    if (capiToken && !leadData.is_partial) {
+      const crypto = globalThis.crypto;
+      const eventId = crypto.randomUUID();
+      // SHA-256 hash helper
+      const sha256 = async (val: string): Promise<string> => {
+        const buf = await crypto.subtle.digest(
+          "SHA-256",
+          new TextEncoder().encode(val.trim().toLowerCase())
+        );
+        return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+      };
+      const nameParts = leadData.name.trim().split(" ");
+      const [hashedEmail, hashedPhone, hashedFn, hashedLn, hashedZip, hashedState] = await Promise.all([
+        leadData.email ? sha256(leadData.email) : Promise.resolve(""),
+        leadData.phone ? sha256(leadData.phone.replace(/\D/g, "")) : Promise.resolve(""),
+        nameParts[0] ? sha256(nameParts[0]) : Promise.resolve(""),
+        nameParts.length > 1 ? sha256(nameParts.slice(1).join(" ")) : Promise.resolve(""),
+        leadData.zip ? sha256(leadData.zip) : Promise.resolve(""),
+        leadData.state ? sha256(leadData.state.toLowerCase()) : Promise.resolve(""),
+      ]);
+      const userData: Record<string, unknown> = {};
+      if (hashedEmail) userData.em = [hashedEmail];
+      if (hashedPhone) userData.ph = [hashedPhone];
+      if (hashedFn) userData.fn = [hashedFn];
+      if (hashedLn) userData.ln = [hashedLn];
+      if (hashedZip) userData.zp = [hashedZip];
+      if (hashedState) userData.st = [hashedState];
+      if (leadData.fbclid) userData.fbc = `fb.1.${Date.now()}.${leadData.fbclid}`;
+      userData.client_user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15";
+      const capiPayload = {
+        data: [{
+          event_name: "Lead",
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: `https://${leadData.landing_host || "installspros.com"}/`,
+          action_source: "website",
+          user_data: userData,
+          custom_data: {
+            lead_type: leadData.lead_type || "residential",
+            installation_type: leadData.installationType || "",
+            utm_source: leadData.utm_source || "",
+            utm_campaign: leadData.utm_campaign || "",
+          },
+        }],
+      };
+      const testCode = Deno.env.get("META_CAPI_TEST_CODE");
+      if (testCode) (capiPayload as Record<string, unknown>).test_event_code = testCode;
+      webhookPromises.push(
+        fetch(`https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${capiToken}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(capiPayload),
+        })
+          .then(async (res) => {
+            const text = await res.text();
+            console.log("Meta CAPI response:", res.status, text);
+            return { name: "MetaCAPI", success: res.ok, status: res.status };
+          })
+          .catch((err) => {
+            console.error("Meta CAPI error:", err.message);
+            return { name: "MetaCAPI", success: false, error: err.message };
+          })
+      );
+    } else if (!capiToken) {
+      console.warn("META_CAPI_TOKEN not set — skipping server-side pixel");
+    }
+    // ── End Meta CAPI ──────────────────────────────────────────────
+
     const results = await Promise.all(webhookPromises);
     console.log("Webhook results:", results);
 
