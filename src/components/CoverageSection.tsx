@@ -23,7 +23,7 @@ const CoverageSection = ({ statesCount = "37", installCount = "5,000+" }: Covera
           {[
             { value: "49", label: "States Covered" },
             { value: "310+", label: "Cities with Service", highlight: true },
-            { value: "3488+", label: "Installations Completed" },
+            { value: "5855+", label: "Installations Completed" },
             { value: "98%", label: "US Coverage" },
           ].map((stat) => (
             <div key={stat.label} className="bg-muted/50 rounded-xl px-4 py-6 text-center">

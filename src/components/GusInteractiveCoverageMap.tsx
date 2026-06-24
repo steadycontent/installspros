@@ -10,7 +10,7 @@ const COMING_SOON_STATES = ["ND"];
 const stats = [
   { value: 49, label: "States Covered", suffix: "" },
   { value: 310, label: "Cities with Service", suffix: "+", highlight: true },
-  { value: 3488, label: "Installations Completed", suffix: "+" },
+  { value: 5855, label: "Installations Completed", suffix: "+" },
   { value: 98, label: "US Coverage", suffix: "%" },
 ];
 
