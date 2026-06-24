@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import starlinkKitImage from "@/assets/starlink-kit.jpg";
+import starlinkRoofImage from "@/assets/starlink-roof-install.jpg";
 
 const EquipmentSection = () => {
   return (
@@ -10,8 +10,11 @@ const EquipmentSection = () => {
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-60" />
             <img
-              src={starlinkKitImage}
-              alt="Satellite internet equipment kit"
+              src={starlinkRoofImage}
+              alt="Rectangular Starlink dish professionally mounted on a residential home's roof"
+              loading="lazy"
+              width={1536}
+              height={1024}
               className="relative rounded-2xl shadow-lg w-full"
             />
           </div>
