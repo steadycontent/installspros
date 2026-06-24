@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Check, Clock, ArrowLeft, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/installpros-logo.svg";
+import logo from "@/assets/installpros-logo.webp";
 import { cn } from "@/lib/utils";
 
 interface ProgressStep {

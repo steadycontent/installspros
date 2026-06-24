@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { handleQuoteCTA } from "@/lib/handleQuoteCTA";
-import installProsLogo from "@/assets/installpros-logo.svg";
+import installProsLogo from "@/assets/installpros-logo.webp";
 
 const GusNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

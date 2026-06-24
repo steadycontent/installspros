@@ -1,7 +1,7 @@
-import residentialImage from "@/assets/starlink-residential-opt.jpg";
-import commercialImage from "@/assets/starlink-commercial-opt.jpg";
-import marineImage from "@/assets/starlink-marine-new-opt.jpg";
-import mobileImage from "@/assets/starlink-mobile-rv-new-opt.jpg";
+import residentialImage from "@/assets/starlink-residential-opt.webp";
+import commercialImage from "@/assets/starlink-commercial-opt.webp";
+import marineImage from "@/assets/starlink-marine-new-opt.webp";
+import mobileImage from "@/assets/starlink-mobile-rv-new-opt.webp";
 
 const features = [
   {

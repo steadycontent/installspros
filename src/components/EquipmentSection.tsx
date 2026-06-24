@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import starlinkRoofImage from "@/assets/starlink-roof-install.jpg";
+import starlinkRoofImage from "@/assets/starlink-roof-install.webp";
 
 const EquipmentSection = () => {
   return (
