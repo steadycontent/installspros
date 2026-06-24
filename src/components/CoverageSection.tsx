@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import usaMap from "@/assets/usa-map-hires.png";
+import usaMap from "@/assets/usa-map-hires.webp";
 import { cityLocations } from "@/data/usCities";
 
 interface CoverageSectionProps {

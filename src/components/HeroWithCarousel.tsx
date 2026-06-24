@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import InlineQuoteFlow from "@/components/InlineQuoteFlow";
 import residentialImage from "@/assets/starlink-residential-opt.jpg";
 import commercialImage from "@/assets/starlink-commercial-opt.jpg";
-import mobileImage from "@/assets/starlink-mobile-rv.png";
+import mobileImage from "@/assets/starlink-mobile-rv-new-opt.jpg";
 const slides = [{
   id: "residential",
   title: "Residential Satellite Internet",
