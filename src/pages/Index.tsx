@@ -1,18 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import SupportDisclaimerBar from "@/components/SupportDisclaimerBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import { useVariant } from "@/hooks/useVariant";
-import FeaturesSection from "@/components/FeaturesSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import EquipmentSection from "@/components/EquipmentSection";
-import SmartHomeSection from "@/components/SmartHomeSection";
-import CoverageSection from "@/components/CoverageSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+
+// Below-the-fold sections — lazy-loaded to speed up initial render / LCP
+const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
+const HowItWorksSection = lazy(() => import("@/components/HowItWorksSection"));
+const EquipmentSection = lazy(() => import("@/components/EquipmentSection"));
+const SmartHomeSection = lazy(() => import("@/components/SmartHomeSection"));
+const CoverageSection = lazy(() => import("@/components/CoverageSection"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
+const CTASection = lazy(() => import("@/components/CTASection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   const variant = useVariant();
@@ -51,15 +53,17 @@ const Index = () => {
         <SupportDisclaimerBar />
         <Navbar />
         <HeroSection variant={variant} skipIntentGate />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <EquipmentSection />
-        <SmartHomeSection />
-        <CoverageSection />
-        <TestimonialsSection />
-        <section id="faq"><FAQSection /></section>
-        <CTASection />
-        <Footer />
+        <Suspense fallback={<div className="min-h-[200px]" />}>
+          <FeaturesSection />
+          <HowItWorksSection />
+          <EquipmentSection />
+          <SmartHomeSection />
+          <CoverageSection />
+          <TestimonialsSection />
+          <section id="faq"><FAQSection /></section>
+          <CTASection />
+          <Footer />
+        </Suspense>
       </main>
     </>
   );
