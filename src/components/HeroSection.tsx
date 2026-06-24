@@ -5,7 +5,6 @@ import InlineQuoteFlow from "@/components/InlineQuoteFlow";
 import { scrollToQuoteFunnel } from "@/lib/handleQuoteCTA";
 import { Button } from "@/components/ui/button";
 import type { VariantId } from "@/hooks/useVariant";
-import starlinkDishCompass from "@/assets/starlink-dish-compass.png";
 import iconSupport from "@/assets/icon-support-help.png";
 
 interface HeroSectionProps {
