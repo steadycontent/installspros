@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
-import logo from "@/assets/installpros-logo.svg";
+import logo from "@/assets/installpros-logo.webp";
 
 interface QuoteData {
   name: string;
