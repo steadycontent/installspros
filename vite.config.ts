@@ -27,7 +27,10 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("lucide-react")) return "icons-vendor";
           if (id.includes("recharts") || id.includes("d3-")) return "charts-vendor";
           if (id.includes("date-fns") || id.includes("react-day-picker")) return "date-vendor";
-          if (id.includes("zod") || id.includes("react-hook-form")) return "form-vendor";
+          if (id.includes("framer-motion")) return "motion-vendor";
+          if (id.includes("embla-carousel")) return "carousel-vendor";
+          if (id.includes("cmdk") || id.includes("vaul") || id.includes("sonner") || id.includes("input-otp") || id.includes("react-resizable-panels")) return "ui-extras-vendor";
+          if (id.includes("zod") || id.includes("react-hook-form") || id.includes("@hookform")) return "form-vendor";
           return "vendor";
         },
       },
