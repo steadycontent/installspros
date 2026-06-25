@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Star, ExternalLink, ArrowRight } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
-import InlineQuoteFlow from "@/components/InlineQuoteFlow";
 import { scrollToQuoteFunnel } from "@/lib/handleQuoteCTA";
 import { Button } from "@/components/ui/button";
 import type { VariantId } from "@/hooks/useVariant";
 import iconSupport from "@/assets/icon-support-help.png";
+
+// Defer the full quote funnel bundle until the user clicks "Get a Quote"
+const InlineQuoteFlow = lazy(() => import("@/components/InlineQuoteFlow"));
 
 interface HeroSectionProps {
   variant?: VariantId;
