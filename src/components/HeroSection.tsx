@@ -230,7 +230,7 @@ const HeroSection = ({
                     </div>
                   </div> :
               undefined} />
-            
+              </Suspense>
             </div>
           </div>
         }
