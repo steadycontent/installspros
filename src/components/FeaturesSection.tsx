@@ -1,4 +1,4 @@
-import residentialImage from "@/assets/starlink-residential-opt.webp";
+import residentialImage from "@/assets/starlink-residential-opt.webp.asset.json";
 import commercialImage from "@/assets/starlink-commercial-opt.webp";
 import marineImage from "@/assets/starlink-marine-new-opt.webp";
 import mobileImage from "@/assets/starlink-mobile-rv-new-opt.webp";
