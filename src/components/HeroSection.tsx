@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Star, ExternalLink, ArrowRight } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
-import InlineQuoteFlow from "@/components/InlineQuoteFlow";
 import { scrollToQuoteFunnel } from "@/lib/handleQuoteCTA";
 import { Button } from "@/components/ui/button";
 import type { VariantId } from "@/hooks/useVariant";
 import iconSupport from "@/assets/icon-support-help.png";
+
+// Defer the full quote funnel bundle until the user clicks "Get a Quote"
+const InlineQuoteFlow = lazy(() => import("@/components/InlineQuoteFlow"));
 
 interface HeroSectionProps {
   variant?: VariantId;
@@ -190,6 +192,7 @@ const HeroSection = ({
         {intentRevealed &&
         <div className="animate-fade-in-up mt-6 relative z-[100]">
             <div id="quote-funnel-container" className="relative z-50 rounded-2xl">
+              <Suspense fallback={<div className="min-h-[280px] rounded-2xl bg-white/5 animate-pulse" />}>
               <InlineQuoteFlow
               variant="transparent"
               addressFirst={addressFirst}
@@ -227,7 +230,7 @@ const HeroSection = ({
                     </div>
                   </div> :
               undefined} />
-            
+              </Suspense>
             </div>
           </div>
         }
