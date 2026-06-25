@@ -1,4 +1,4 @@
-import residentialAsset from "@/assets/starlink-residential-opt.webp.asset.json";
+import residentialImage from "@/assets/starlink-residential-opt.webp";
 import commercialImage from "@/assets/starlink-commercial-opt.webp";
 import marineImage from "@/assets/starlink-marine-new-opt.webp";
 import mobileImage from "@/assets/starlink-mobile-rv-new-opt.webp";
@@ -7,7 +7,7 @@ const features = [
   {
     title: "Residential Satellite Internet",
     description: "Professional home installation with optimal roof positioning for maximum signal.",
-    image: residentialAsset.url,
+    image: residentialImage,
   },
   {
     title: "Commercial Satellite Internet",
