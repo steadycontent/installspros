@@ -192,6 +192,7 @@ const HeroSection = ({
         {intentRevealed &&
         <div className="animate-fade-in-up mt-6 relative z-[100]">
             <div id="quote-funnel-container" className="relative z-50 rounded-2xl">
+              <Suspense fallback={<div className="min-h-[280px] rounded-2xl bg-white/5 animate-pulse" />}>
               <InlineQuoteFlow
               variant="transparent"
               addressFirst={addressFirst}
