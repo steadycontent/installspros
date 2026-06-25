@@ -27,19 +27,7 @@
     <meta name="twitter:site" content="@InstallPros" />
     <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9466f4c1-6f6a-4068-9256-59ef79c4e280/id-preview-3518bdf9--b757a342-4eb7-4c5c-bb5f-1beb6af2bdcf.lovable.app-1778373797155.png">
 
-    <!-- Google Ads (gtag.js) — dataLayer/gtag init synchronously so events queue
-         safely; the actual script is loaded after window.load to avoid blocking render.
-         To rotate, also update src/lib/googleAds.ts. -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ window.dataLayer.push(arguments); }
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'AW-17712194751');
-      gtag('config', 'AW-18151111532');
-    </script>
-
-    <!-- Hotjar + Google Ads loader - deferred to not block rendering -->
+    <!-- Hotjar + Bing loader - deferred to not block rendering -->
     <script>
       window.addEventListener('load', function() {
         // Hotjar
@@ -52,18 +40,6 @@
           e.src = q + c._hjSettings.hjid + u;
           r.appendChild(e);
         })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js', 6645720);
-
-        // Google Ads gtag.js loader
-        (function() {
-          var g = document.createElement('script');
-          g.async = true;
-          g.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17712194751';
-          document.head.appendChild(g);
-          var g2 = document.createElement('script');
-          g2.async = true;
-          g2.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18151111532';
-          document.head.appendChild(g2);
-        })();
 
         // Bing UET tag
         (function(w,d,t,u,o){w[u]=w[u]||[],o.ts=(new Date).getTime();var n=d.createElement(t);n.src="https://bat.bing.net/bat.js?ti="+o.ti+("uetq"!=u?"&q="+u:""),n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&"loaded"!==s&&"complete"!==s||(o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad"),n.onload=n.onreadystatechange=null)};var i=d.getElementsByTagName(t)[0];i.parentNode.insertBefore(n,i);})(window,document,"script","uetq",{ti:"187255623",enableAutoSpaTracking:true});
