@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import InlineQuoteFlow from "@/components/InlineQuoteFlow";
-import residentialImage from "@/assets/starlink-residential-opt.webp.asset.json";
+import residentialAsset from "@/assets/starlink-residential-opt.webp.asset.json";
 import commercialImage from "@/assets/starlink-commercial-opt.webp";
 import mobileImage from "@/assets/starlink-mobile-rv-new-opt.webp";
 const slides = [{
   id: "residential",
   title: "Residential Satellite Internet",
-  image: residentialImage
+  image: residentialAsset.url
 }, {
   id: "commercial",
   title: "Commercial Satellite Internet",
