@@ -341,7 +341,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Server-side Lead event — fires even when browser pixel is blocked (iOS 14+)
     const capiToken = Deno.env.get("META_CAPI_TOKEN");
     const PIXEL_ID = "898862795583500";
-    if (capiToken && !leadData.is_partial) {
+    if (capiToken) {
       const crypto = globalThis.crypto;
       const eventId = crypto.randomUUID();
       // SHA-256 hash helper
