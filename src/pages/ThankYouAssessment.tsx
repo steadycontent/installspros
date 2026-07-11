@@ -33,10 +33,10 @@ const ThankYouAssessment = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+15126756605"
+                href="tel:+15128070716"
                 className="inline-flex items-center justify-center gap-2 rounded-[4px] bg-primary text-primary-foreground h-12 px-6 font-semibold"
               >
-                Call (512) 675-6605
+                Call (512) 807-0716
               </a>
               <Link
                 to="/"

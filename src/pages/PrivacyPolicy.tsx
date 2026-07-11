@@ -165,7 +165,7 @@ const PrivacyPolicy = () => {
             <p className="mb-4">
               InstallPros<br />
               Website: <a href="https://installspros.com" className="text-primary hover:underline">https://installspros.com</a><br />
-              Phone: <a href="tel:+15126756605" className="text-primary hover:underline">(512) 675-6605</a>
+              Phone: <a href="tel:+15128070716" className="text-primary hover:underline">(512) 807-0716</a>
             </p>
           </article>
         </main>

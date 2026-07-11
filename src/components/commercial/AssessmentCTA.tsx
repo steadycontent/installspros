@@ -24,11 +24,11 @@ const AssessmentCTA = () => (
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="tel:+15126756605"
+            href="tel:+15128070716"
             className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-border bg-card h-14 px-6 font-semibold hover:bg-muted transition-colors"
           >
             <Phone className="w-4 h-4" />
-            Call (512) 675-6605
+            Call (512) 807-0716
           </a>
         </div>
       </div>
