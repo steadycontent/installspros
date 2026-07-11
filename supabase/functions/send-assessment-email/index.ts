@@ -62,7 +62,7 @@ const handler = async (req: Request): Promise<Response> => {
             <li>Recommended equipment plan</li>
             <li>Revenue & ROI model</li>
           </ul>
-          <p style="color:#d1d5db;line-height:1.6;">In the meantime, if you have questions, call us at <a href="tel:5126756605" style="color:#1E90FF;text-decoration:none;"><strong>(512) 675-6605</strong></a>.</p>
+          <p style="color:#d1d5db;line-height:1.6;">In the meantime, if you have questions, call us at <a href="tel:5128070716" style="color:#1E90FF;text-decoration:none;"><strong>(512) 807-0716</strong></a>.</p>
         </div>
         <div style="padding:16px 0;border-top:1px solid #1f2937;color:#6b7280;font-size:12px;text-align:center;">
           InstallPros &middot; Commercial WiFi & Starlink &middot; 30,000+ installs, 37 states
