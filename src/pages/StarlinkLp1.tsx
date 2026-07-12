@@ -76,7 +76,7 @@ const testimonials = [
 const stats = [
   { value: "37", label: "States Covered" },
   { value: "310+", label: "Cities with Service" },
-  { value: "5,000+", label: "Installations Completed" },
+  { value: "7,000+", label: "Installations Completed" },
   { value: "98%", label: "US Coverage" }
 ];
 
@@ -211,7 +211,7 @@ const StarlinkLp1 = () => {
               {/* Installations Count */}
               <div className="flex items-center gap-3 bg-card backdrop-blur-sm rounded-lg px-4 py-3 border border-border shadow-card">
                 <div className="text-left">
-                  <div className="text-2xl font-bold text-primary">5,000+</div>
+                  <div className="text-2xl font-bold text-primary">7,000+</div>
                   <div className="text-xs text-muted-foreground font-medium">U.S. Installations</div>
                 </div>
               </div>

@@ -122,7 +122,7 @@ const StarlinkHeroSection = () => {
         <div className="opacity-0 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium backdrop-blur-sm">
             <Satellite className="w-4 h-4" />
-            Certified Starlink Installation Experts
+            Your Local Starlink Installation Experts
           </span>
         </div>
 
@@ -248,7 +248,7 @@ const StarlinkHeroSection = () => {
 
           {/* Stats */}
           <div className="col-span-2 md:col-span-1 bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center">
-            <span className="text-white font-bold text-2xl">5,000+</span>
+            <span className="text-white font-bold text-2xl">7,000+</span>
             <span className="text-white/60 text-xs">Installations Completed</span>
           </div>
         </div>

@@ -7,7 +7,7 @@ interface CoverageSectionProps {
   installCount?: string;
 }
 
-const CoverageSection = ({ statesCount = "37", installCount = "5,000+" }: CoverageSectionProps) => {
+const CoverageSection = ({ statesCount = "37", installCount = "7,000+" }: CoverageSectionProps) => {
   return (
     <section className="section section-light">
       <div className="max-w-6xl mx-auto text-center">

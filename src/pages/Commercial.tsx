@@ -145,7 +145,7 @@ const Commercial = () => {
 
             {/* Trust line */}
             <p className="text-center text-white/40 text-xs mt-6">
-              8,000+ installs · All 50 states · 4.9★ Google rating
+              7,000+ installs · All 50 states · 4.9★ Google rating
             </p>
           </div>
         </section>

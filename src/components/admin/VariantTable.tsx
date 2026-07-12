@@ -22,7 +22,7 @@ const variantDescriptions: Record<string, { label: string; elements: string[] }>
   },
   credibility: {
     label: "Trust Signals",
-    elements: ["Google 5.0 ⭐", "Trustpilot", "5,000+ installs"],
+    elements: ["Google 5.0 ⭐", "Trustpilot", "7,000+ installs"],
   },
   default: {
     label: "Unassigned",

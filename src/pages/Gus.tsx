@@ -22,7 +22,7 @@ const Gus = () => {
         <title>InstallPros – Starlink Installation & Smart Home Experts</title>
         <meta
           name="description"
-          content="All-in-One Starlink installation services and smart home automation solutions across the U.S. Expert nationwide installs with the best pricing."
+          content="All-in-One Starlink installation services and smart home automation solutions across the U.S. Expert nationwide installs with the transparent flat-rate pricing."
         />
         <meta name="keywords" content="Starlink installation, smart home, satellite internet, home automation, security systems" />
         <link rel="canonical" href="https://installpros.io/gus" />
@@ -32,7 +32,7 @@ const Gus = () => {
         <GusNavbar />
         <HeroSection
           variant={variant}
-          installCount="3,488+"
+          installCount="7,000+"
           installLabel="Installations"
           heading={"Get Starlink Installed\nThis Week"}
           subheading={"Expert mounting, weatherproof sealing & full setup.\nMost customers are online within 7 days."}
@@ -60,7 +60,7 @@ const Gus = () => {
         <section id="faq">
           <FAQSection />
         </section>
-        <CTASection installCount="3,488+" statesServed="49" heading="Don't Wait — Get Installed This Week" subheading="Join thousands who skipped the DIY headache. Professional setup, guaranteed." hidePhoneCTA />
+        <CTASection installCount="7,000+" statesServed="49" heading="Don't Wait — Get Installed This Week" subheading="Join thousands who skipped the DIY headache. Professional setup, guaranteed." hidePhoneCTA />
         <Footer />
       </main>
     </>

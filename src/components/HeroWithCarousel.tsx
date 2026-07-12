@@ -48,7 +48,7 @@ const HeroWithCarousel = () => {
         <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]" style={{
         animationFillMode: 'forwards'
       }}>
-          Expert nationwide installs with the best pricing on satellite internet hardware and smart home integrations.
+          Expert nationwide installs with transparent, flat-rate pricing on satellite internet hardware and smart home integrations.
         </p>
         
         {/* Inline Quote Form with dark backdrop */}

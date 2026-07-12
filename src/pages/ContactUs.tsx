@@ -287,7 +287,7 @@ const ContactUs = () => {
                     <h3 className="font-semibold mb-4">Trusted Nationwide</h3>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-2xl font-bold">5,000+</p>
+                        <p className="text-2xl font-bold">7,000+</p>
                         <p className="text-xs text-white/70">Installations</p>
                       </div>
                       <div>

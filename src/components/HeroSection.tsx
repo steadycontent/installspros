@@ -33,7 +33,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({
   variant = "control",
-  installCount = "5,000+",
+  installCount = "7,000+",
   installLabel = "Successful Installs",
   heading,
   subheading,
@@ -102,7 +102,7 @@ const HeroSection = ({
 
         {/* Headline */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white animate-fade-in-up mb-3 sm:mb-4 text-center leading-tight [word-break:keep-all] [overflow-wrap:normal] [hyphens:none]">
-          {heading || (<>Professional Satellite Internet<br className="sm:hidden" /> Installation</>)}
+          {heading || (<>Your Local Starlink Installation Experts — 5.0★ Across 59 Reviews</>)}
         </h1>
 
         {/* Subheadline */}
@@ -110,7 +110,7 @@ const HeroSection = ({
           className="text-base sm:text-lg md:text-xl text-[#D1D5DB] max-w-3xl mx-auto mb-2 sm:mb-3 animate-fade-in-up opacity-0 animation-delay-200 text-center px-4 sm:px-6 whitespace-pre-line"
           style={{ animationFillMode: "forwards" }}>
 
-          {subheading || "Professional residential satellite internet installations handled from start to finish."}
+          {subheading || "More than 7,000 installs nationwide. Local technicians in your area, vetted and insured."}
         </p>
 
         {!badgeAboveHeading &&

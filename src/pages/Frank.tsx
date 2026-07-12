@@ -17,7 +17,7 @@ const Frank = () => {
         <title>InstallPros – Starlink Installation & Smart Home Experts</title>
         <meta
           name="description"
-          content="All-in-One Starlink installation services and smart home automation solutions across the U.S. Expert nationwide installs with the best pricing."
+          content="All-in-One Starlink installation services and smart home automation solutions across the U.S. Expert nationwide installs with the transparent flat-rate pricing."
         />
         <meta name="keywords" content="Starlink installation, smart home, satellite internet, home automation, security systems" />
         <link rel="canonical" href="https://installpros.io/frank" />
