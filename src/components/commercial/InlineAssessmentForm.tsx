@@ -165,6 +165,7 @@ const InlineAssessmentForm = ({ className, defaultIndustry }: Props) => {
         session_id: sessionStorage.getItem("session_id") || crypto.randomUUID(),
         device_type: window.innerWidth < 768 ? "mobile" : "desktop",
         landing_host: window.location.hostname,
+        landing_path: window.location.pathname,
         source_domain: window.location.hostname,
       };
 

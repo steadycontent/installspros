@@ -403,6 +403,7 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
         session_id: sessionStorage.getItem("installpros_analytics_session") || "",
         device_type: detectDeviceType(),
         landing_host: window.location.hostname,
+        landing_path: window.location.pathname,
         source_domain: window.location.hostname
       };
 
@@ -674,6 +675,7 @@ const InlineQuoteFlow = ({ variant = "card", addressFirst = false, addressButton
             session_id: sessionStorage.getItem("installpros_analytics_session") || "",
             device_type: detectDeviceType(),
             landing_host: window.location.hostname,
+        landing_path: window.location.pathname,
             source_domain: window.location.hostname
           }
         }).then(({ error }) => {

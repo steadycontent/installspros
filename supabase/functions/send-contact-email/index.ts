@@ -181,6 +181,50 @@ const handler = async (req: Request): Promise<Response> => {
         })
     );
 
+    // 4. Forward to Fix9 lead-ingest
+    const fix9Key = Deno.env.get("FIX9_API_KEY");
+    if (fix9Key) {
+      const parts = name.trim().split(/\s+/);
+      webhookPromises.push(
+        fetch("https://zgrulcdxjemktfvqhkmh.supabase.co/functions/v1/lead-ingest", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${fix9Key}`,
+            "x-api-key": fix9Key,
+            "x-org-slug": "installpros",
+          },
+          body: JSON.stringify({
+            event_type: "lead.created",
+            lead: {
+              full_name: name,
+              first_name: parts[0] || "",
+              last_name: parts.slice(1).join(" "),
+              email,
+              phone,
+              message,
+              source_platform: "INSTALLPROS_QUOTE",
+              source: "installSpros.com/contact",
+              tags: ["installSpros"],
+              custom_fields: Object.fromEntries(
+                Object.entries({ ...ghlPayload }).map(([k, v]) => [k, String(v ?? "")])
+              ),
+            },
+          }),
+        })
+          .then((res) => {
+            console.log("Fix9 response status:", res.status);
+            return { name: "Fix9", success: res.ok, status: res.status };
+          })
+          .catch((err) => {
+            console.error("Fix9 error:", err.message);
+            return { name: "Fix9", success: false, error: err.message };
+          })
+      );
+    } else {
+      console.warn("FIX9_API_KEY not set — skipping Fix9 forward");
+    }
+
     const results = await Promise.all(webhookPromises);
     console.log("Results:", results);
 

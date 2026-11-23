@@ -90,6 +90,7 @@ export default function FunnelEngine({ config, variantId }: Props) {
             variant_id: variantId || "",
             session_id: sessionStorage.getItem("installpros_analytics_session") || "",
             landing_host: window.location.hostname,
+            landing_path: window.location.pathname,
           },
         });
       }

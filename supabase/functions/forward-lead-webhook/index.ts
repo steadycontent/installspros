@@ -361,7 +361,12 @@ const handler = async (req: Request): Promise<Response> => {
           zip: leadData.zip,
           postal_code: leadData.zip,
           source_platform: "INSTALLPROS_QUOTE",
-          source: "installspros.com",
+          source: (() => {
+            const h = (leadData.landing_host || "").replace(/^www\./, "");
+            if (h !== "installspros.com") return "installpros-quote-form";
+            const p = sanitize(raw.landing_path, 500).replace(/\/+$/, "");
+            return `installSpros.com${p.startsWith("/") ? p : p ? "/" + p : "/"}`;
+          })(),
           source_url: (() => {
             const u = sanitize(raw.landing_url || raw.page_url, 2000);
             return /^https?:\/\//i.test(u) ? u : `https://${host9}`;
