@@ -362,12 +362,19 @@ const handler = async (req: Request): Promise<Response> => {
           postal_code: leadData.zip,
           source_platform: "INSTALLPROS_QUOTE",
           source: "installspros.com",
-          source_url: `https://${host9}`,
+          source_url: (() => {
+            const u = sanitize(raw.landing_url || raw.page_url, 2000);
+            return /^https?:\/\//i.test(u) ? u : `https://${host9}`;
+          })(),
           source_domain: leadData.source_domain || host9,
           tags: ["installSpros"],
           service_type: String(leadData.installationType || ""),
           lead_type: String(leadData.lead_type || ""),
-          custom_fields: flatten({ service_type: leadData.installationType, lead_type: leadData.lead_type, ...answers }),
+          custom_fields: {
+            service_type: String(leadData.installationType || ""),
+            lead_type: String(leadData.lead_type || ""),
+            service_answers: flatten(answers),
+          },
           is_partial: leadData.is_partial ? "true" : "false",
           utm_source: leadData.utm_source,
           utm_medium: leadData.utm_medium,
