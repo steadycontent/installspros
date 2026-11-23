@@ -1,0 +1,1 @@
+ALTER TABLE public.leads ADD COLUMN IF NOT EXISTS fix9_forwarding_status text, ADD COLUMN IF NOT EXISTS fix9_forwarded_at timestamptz;

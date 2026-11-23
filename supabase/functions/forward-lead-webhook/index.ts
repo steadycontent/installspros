@@ -94,7 +94,7 @@ const handler = async (req: Request): Promise<Response> => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const dbClient = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { error: dbError } = await dbClient.from("leads").insert({
+    const { data: insertedLead, error: dbError } = await dbClient.from("leads").insert({
       name: leadData.name,
       email: leadData.email,
       phone: leadData.phone,
@@ -118,7 +118,7 @@ const handler = async (req: Request): Promise<Response> => {
       landing_host: leadData.landing_host || null,
       lead_type: leadData.lead_type || "residential",
       property_meta: leadData.property_meta ?? null,
-    });
+    }).select("id").single();
 
     if (dbError) {
       console.error("DB insert error:", dbError.message);
@@ -335,7 +335,87 @@ const handler = async (req: Request): Promise<Response> => {
         })
     );
 
-    console.log("Fix9 integration is currently PAUSED");
+    // ── Fix9 lead-ingest (InstallPros org) ─────────────────────────
+    const fix9Key = Deno.env.get("FIX9_API_KEY");
+    if (fix9Key) {
+      const flatten = (obj: Record<string, unknown>): string =>
+        Object.entries(obj)
+          .filter(([, v]) => v !== null && v !== undefined && v !== "")
+          .map(([k, v]) => `${k}: ${typeof v === "object" ? JSON.stringify(v) : String(v)}`)
+          .join("; ");
+      const answers = (leadData.property_meta ?? {}) as Record<string, unknown>;
+      const nameParts9 = leadData.name.trim().split(/\s+/);
+      const host9 = leadData.landing_host || "installspros.com";
+      const fix9Payload = {
+        event_type: "lead.created",
+        lead: {
+          full_name: leadData.name,
+          first_name: nameParts9[0] || "",
+          last_name: nameParts9.slice(1).join(" "),
+          email: leadData.email,
+          phone: leadData.phone,
+          address: fullAddress,
+          street: leadData.street,
+          city: leadData.city,
+          state: leadData.state,
+          zip: leadData.zip,
+          postal_code: leadData.zip,
+          source_platform: "INSTALLPROS_QUOTE",
+          source: "installspros.com",
+          source_url: `https://${host9}`,
+          source_domain: leadData.source_domain || host9,
+          tags: ["installSpros"],
+          service_type: String(leadData.installationType || ""),
+          lead_type: String(leadData.lead_type || ""),
+          custom_fields: flatten({ service_type: leadData.installationType, lead_type: leadData.lead_type, ...answers }),
+          is_partial: leadData.is_partial ? "true" : "false",
+          utm_source: leadData.utm_source,
+          utm_medium: leadData.utm_medium,
+          utm_campaign: leadData.utm_campaign,
+          utm_term: leadData.utm_term,
+          utm_content: leadData.utm_content,
+          gclid: leadData.gclid,
+          fbclid: leadData.fbclid,
+          device_type: leadData.device_type,
+        },
+      };
+      const leadId = insertedLead?.id as string | undefined;
+      webhookPromises.push(
+        fetch("https://zgrulcdxjemktfvqhkmh.supabase.co/functions/v1/lead-ingest", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${fix9Key}`,
+            "x-api-key": fix9Key,
+            "x-org-slug": "installpros",
+          },
+          body: JSON.stringify(fix9Payload),
+        })
+          .then(async (res) => {
+            const text = (await res.text()).slice(0, 300);
+            console.log("Fix9 response:", res.status, res.ok ? "ok" : text);
+            if (leadId) {
+              await dbClient.from("leads").update({
+                fix9_forwarding_status: res.ok ? "sent" : `error ${res.status}`,
+                fix9_forwarded_at: new Date().toISOString(),
+              }).eq("id", leadId);
+            }
+            return { name: "Fix9", success: res.ok, status: res.status };
+          })
+          .catch(async (err) => {
+            console.error("Fix9 error:", String(err?.message ?? err).slice(0, 300));
+            if (leadId) {
+              await dbClient.from("leads").update({
+                fix9_forwarding_status: "error",
+                fix9_forwarded_at: new Date().toISOString(),
+              }).eq("id", leadId);
+            }
+            return { name: "Fix9", success: false, error: err.message };
+          })
+      );
+    } else {
+      console.warn("FIX9_API_KEY not set — skipping Fix9 forward");
+    }
 
     // ── Meta Conversions API (CAPI) ────────────────────────────────
     // Server-side Lead event — fires even when browser pixel is blocked (iOS 14+)

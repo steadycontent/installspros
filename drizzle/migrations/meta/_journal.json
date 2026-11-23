@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795464952381,
+      "tag": "0000_leads_fix9_forwarding_status",
+      "breakpoints": true
+    }
+  ]
+}
